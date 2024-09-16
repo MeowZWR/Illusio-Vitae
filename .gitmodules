@@ -1,3 +1,4 @@
 [submodule "Penumbra.String"]
 	path = Penumbra.String
-	url = https://github.com/Ottermandias/Penumbra.String
+	url = https://github.com/MeowZWR/Penumbra.String
+	branch = cn
