@@ -38,9 +38,9 @@ namespace IVPlugin.UI.Windows.Tabs
             int minuteOfDay = WorldManager.Instance.MinuteOfDay;
             int dayOfMonth = WorldManager.Instance.DayOfMonth;
 
-            BearGUI.Text("Time and Weather Controller", 1.1f);
+            BearGUI.Text("时间与天气控制器", 1.1f);
             ImGui.SetNextItemWidth(250);
-            if (ImGui.SliderInt("Time of Day", ref minuteOfDay, 0, 1439, $"{TimeSpan.FromMinutes(minuteOfDay).Hours:D2}:{TimeSpan.FromMinutes(minuteOfDay).Minutes:D2}"))
+            if (ImGui.SliderInt("一天中的时间", ref minuteOfDay, 0, 1439, $"{TimeSpan.FromMinutes(minuteOfDay).Hours:D2}:{TimeSpan.FromMinutes(minuteOfDay).Minutes:D2}"))
             {
                 WorldManager.Instance.IsTimeFrozen = true;
                 WorldManager.Instance.MinuteOfDay = minuteOfDay;
@@ -51,18 +51,18 @@ namespace IVPlugin.UI.Windows.Tabs
 
             var currentIcon = timeLocked ? GameResourceManager.Instance.GetResourceImage("Locked.png").ImGuiHandle : GameResourceManager.Instance.GetResourceImage("Unlocked.png").ImGuiHandle;
 
-            if (BearGUI.ImageButton($"Lock Time##TimeLock", currentIcon, new(22, 22)))
+            if (BearGUI.ImageButton($"锁定时间##TimeLock", currentIcon, new(22, 22)))
             {
                 WorldManager.Instance.IsTimeFrozen = !timeLocked;
             }
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Lock Time");
+                ImGui.SetTooltip("锁定时间");
             }
 
             ImGui.SetNextItemWidth(250);
-            if (ImGui.SliderInt("Day of Month", ref dayOfMonth, 1, 31))
+            if (ImGui.SliderInt("一月中的天数", ref dayOfMonth, 1, 31))
             {
                 WorldManager.Instance.IsTimeFrozen = true;
                 WorldManager.Instance.DayOfMonth = dayOfMonth;
@@ -99,20 +99,20 @@ namespace IVPlugin.UI.Windows.Tabs
 
             ImGui.SetCursorPosX(269);
 
-            ImGui.Text("Weather");
+            ImGui.Text("天气");
             ImGui.SameLine();
             ImGui.SetCursorPosX(366);
 
             currentIcon = weatherLocked ? GameResourceManager.Instance.GetResourceImage("Locked.png").ImGuiHandle : GameResourceManager.Instance.GetResourceImage("Unlocked.png").ImGuiHandle;
 
-            if (BearGUI.ImageButton($"Lock Weather##WeatherLock", currentIcon, new(22, 22)))
+            if (BearGUI.ImageButton($"锁定天气##WeatherLock", currentIcon, new(22, 22)))
             {
                 WorldManager.Instance.WeatherOverrideEnabled = !weatherLocked;
             }
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Lock Weather");
+                ImGui.SetTooltip("锁定天气");
             }
 
             using (var popup = ImRaii.Popup("WeatherPopup"))
@@ -151,7 +151,7 @@ namespace IVPlugin.UI.Windows.Tabs
             int skyid = (int)WorldManager.Instance.CurrentSky;
 
             ImGui.SetNextItemWidth(256);
-            if(ImGui.InputInt("Skybox ID", ref skyid))
+            if(ImGui.InputInt("天空盒ID", ref skyid))
             {
                 if(skyid < 0) skyid = 0;
                 WorldManager.Instance.CurrentSky = (uint)skyid;
@@ -171,12 +171,12 @@ namespace IVPlugin.UI.Windows.Tabs
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Reset Skybox");
+                ImGui.SetTooltip("重置天空盒");
             }
 
             ImGui.Separator();
 
-            if (ImGui.CollapsingHeader("Camera Controls"))
+            if (ImGui.CollapsingHeader("相机控制"))
             {
                 using (ImRaii.Disabled(!DalamudServices.clientState.IsGPosing && !IllusioVitae.InDebug()))
                 {
@@ -184,7 +184,7 @@ namespace IVPlugin.UI.Windows.Tabs
                 }
             }
 
-            if (ImGui.CollapsingHeader("Custom Emote Camera Controls"))
+            if (ImGui.CollapsingHeader("自定义情感动作相机控制"))
             {
                 using (ImRaii.Disabled(!DalamudServices.clientState.IsGPosing))
                 {
@@ -235,26 +235,26 @@ namespace IVPlugin.UI.Windows.Tabs
             float zoom = currentCam->Camera.Distance;
             float interp = currentCam->Camera.InterpDistance;
 
-            BearGUI.Text("Camera Controller", 1.1f);
+            BearGUI.Text("相机控制器", 1.1f);
 
-            ImGui.DragFloat3("Camera Offset", ref XIVCamera.instance.posOffset, .05f);
+            ImGui.DragFloat3("相机偏移", ref XIVCamera.instance.posOffset, .05f);
 
-            if (ImGui.DragFloat("FOV", ref fov, .1f, -44, 120))
+            if (ImGui.DragFloat("视场", ref fov, .1f, -44, 120))
             {
                 currentCam->FoV = fov * ExtentionMethods.DegreesToRadians;
             }
 
-            if (ImGui.DragFloat("Rotation", ref rotation, 1, -180, 180))
+            if (ImGui.DragFloat("旋转", ref rotation, 1, -180, 180))
             {
                 currentCam->Rotation = rotation * ExtentionMethods.DegreesToRadians;
             }
 
-            if (ImGui.DragFloat("Zoom", ref zoom, 1, currentCam->Camera.MinDistance, currentCam->Camera.MaxDistance))
+            if (ImGui.DragFloat("变焦", ref zoom, 1, currentCam->Camera.MinDistance, currentCam->Camera.MaxDistance))
             {
                 currentCam->Camera.Distance = zoom;
             }
 
-            if (ImGui.DragFloat2("Angle", ref angle, .01f))
+            if (ImGui.DragFloat2("角度", ref angle, .01f))
             {
                 if (currentCam->type == Camera.Struct.CameraType.Legacy)
                 {
@@ -274,16 +274,16 @@ namespace IVPlugin.UI.Windows.Tabs
                 currentCam->Angle = angle;
             }
 
-            if (ImGui.DragFloat2("Pan", ref pan, .01f))
+            if (ImGui.DragFloat2("平移", ref pan, .01f))
             {
                 currentCam->Pan = pan;
             }
 
-            ImGui.Checkbox("Disable Collision", ref XIVCamera.instance.disableCollision);
+            ImGui.Checkbox("禁用碰撞", ref XIVCamera.instance.disableCollision);
 
             ImGui.SameLine();
 
-            if(ImGui.Checkbox("Remove Zoom Limits", ref XIVCamera.instance.removeZoomLimits))
+            if(ImGui.Checkbox("移除变焦限制", ref XIVCamera.instance.removeZoomLimits))
             {
                 if (XIVCamera.instance.removeZoomLimits)
                 {
@@ -295,14 +295,14 @@ namespace IVPlugin.UI.Windows.Tabs
                 }
             }
 
-            if (ImGui.Button("Reset Camera Controller"))
+            if (ImGui.Button("重置相机控制器"))
             {
                 ResetCameraControls();
             }
 
             if (!DalamudServices.clientState.IsGPosing && !IllusioVitae.InDebug())
             {
-                ImGui.TextColored(IVColors.Red, "Camera Control is Unavailable Outside of Group Pose");
+                ImGui.TextColored(IVColors.Red, "集体动作外无法使用相机控制");
             }
         }
 
@@ -323,13 +323,13 @@ namespace IVPlugin.UI.Windows.Tabs
 
         private static void CCameraDraw()
         {
-            BearGUI.Text("Emote Camera Controller", 1.1f);
+            BearGUI.Text("情感动作相机控制器", 1.1f);
 
-            ImGui.InputText("Camera Path", ref camPath, 1000);
+            ImGui.InputText("相机路径", ref camPath, 1000);
 
-            if (ImGui.Button("Browse"))
+            if (ImGui.Button("浏览"))
             {
-                WindowsManager.Instance.fileDialogManager.OpenFileDialog("Camera File", ".xcp", (Confirm, FilePath) =>
+                WindowsManager.Instance.fileDialogManager.OpenFileDialog("相机文件", ".xcp", (Confirm, FilePath) =>
                 {
                     if (!Confirm) return;
 
@@ -339,7 +339,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
             ImGui.SameLine();
 
-            if (ImGui.Button("Force Play"))
+            if (ImGui.Button("强制播放"))
             {
                 XATCameraPathFile camera;
 
@@ -359,17 +359,17 @@ namespace IVPlugin.UI.Windows.Tabs
             }
 
 
-            ImGui.Checkbox("Hide UI On Play", ref hideUI);
+            ImGui.Checkbox("播放时隐藏UI", ref hideUI);
 
-            ImGui.Checkbox("Enable Race Scaling Offsets For Camera", ref useScale);
+            ImGui.Checkbox("启用种族缩放偏移用于相机", ref useScale);
 
-            ImGui.InputFloat3("Scale", ref IllusioCutsceneManager.Instance.CameraSettings.Scale);
-            ImGui.InputFloat3("Offset", ref IllusioCutsceneManager.Instance.CameraSettings.Offset);
-            ImGui.Checkbox("Loop Emote Camera", ref IllusioCutsceneManager.Instance.CameraSettings.Loop);
+            ImGui.InputFloat3("缩放", ref IllusioCutsceneManager.Instance.CameraSettings.Scale);
+            ImGui.InputFloat3("偏移", ref IllusioCutsceneManager.Instance.CameraSettings.Offset);
+            ImGui.Checkbox("循环情感动作相机", ref IllusioCutsceneManager.Instance.CameraSettings.Loop);
 
             using (ImRaii.Disabled(!IllusioCutsceneManager.Instance.IsRunning))
             {
-                if (ImGui.Button("Force Stop Emote Camera"))
+                if (ImGui.Button("强制停止情感动作相机"))
                 {
                     IllusioCutsceneManager.Instance.StopPlayback();
                 }
@@ -379,7 +379,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
             if (!DalamudServices.clientState.IsGPosing)
             {
-                ImGui.TextColored(IVColors.Red, "Emote Camera Control is Unavailable Outside of Group Pose");
+                ImGui.TextColored(IVColors.Red, "情感动作相机控制在集体动作外不可用");
             }
         }
     }

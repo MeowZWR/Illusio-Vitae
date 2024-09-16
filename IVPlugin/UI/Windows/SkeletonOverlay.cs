@@ -382,7 +382,7 @@ namespace IVPlugin.UI.Windows
 
             ImGui.SetNextWindowSizeConstraints(new Vector2(360, 0), new Vector2(550, 750));
 
-            if (ImGui.Begin("Concept Matrix: Skeleton Editor", ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoScrollWithMouse))
+            if (ImGui.Begin("Concept Matrix: 骨骼编辑器", ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoScrollWithMouse))
             {
                 Transform transform = mainActor.GetTransform();
 
@@ -401,11 +401,11 @@ namespace IVPlugin.UI.Windows
 
                 float oldScale = ImGui.GetFont().Scale;
 
-                BearGUI.Text($"Current Selection: {Name}", 1.1f);
+                BearGUI.Text($"当前选择：{Name}", 1.1f);
                 
                 ImGui.Separator();
 
-                BearGUI.Text("Tools & Settings", 1.1f);
+                BearGUI.Text("工具 & 设置", 1.1f);
 
                 ImGui.Spacing();
 
@@ -413,7 +413,7 @@ namespace IVPlugin.UI.Windows
 
                 var buttonPos = ImGui.GetCursorPos();
 
-                if (BearGUI.ImageButton("Translate", GameResourceManager.Instance.GetResourceImage("Translate.png").ImGuiHandle, new(33,33)))
+                if (BearGUI.ImageButton("移动", GameResourceManager.Instance.GetResourceImage("Translate.png").ImGuiHandle, new(33,33)))
                 {
                     op = OPERATION.TRANSLATE;
                 }
@@ -427,14 +427,14 @@ namespace IVPlugin.UI.Windows
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Mode: Translate");
+                    ImGui.SetTooltip("模式：移动");
                 }
 
                 ImGui.SameLine();
 
                 buttonPos = ImGui.GetCursorPos();
 
-                if (BearGUI.ImageButton("Rotation", GameResourceManager.Instance.GetResourceImage("Rotate.png").ImGuiHandle, new(33, 33)))
+                if (BearGUI.ImageButton("旋转", GameResourceManager.Instance.GetResourceImage("Rotate.png").ImGuiHandle, new(33, 33)))
                 {
                     op = OPERATION.ROTATE;
                 }
@@ -448,14 +448,14 @@ namespace IVPlugin.UI.Windows
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Mode: Rotate");
+                    ImGui.SetTooltip("模式：旋转");
                 }
 
                 ImGui.SameLine();
 
                 buttonPos = ImGui.GetCursorPos();
 
-                if (BearGUI.ImageButton("Scale", GameResourceManager.Instance.GetResourceImage("Scale.png").ImGuiHandle, new(33, 33)))
+                if (BearGUI.ImageButton("缩放", GameResourceManager.Instance.GetResourceImage("Scale.png").ImGuiHandle, new(33, 33)))
                 {
                     op = OPERATION.SCALE;
                 }
@@ -469,12 +469,12 @@ namespace IVPlugin.UI.Windows
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Mode: Scale");
+                    ImGui.SetTooltip("模式：缩放");
                 }
 
                 ImGui.SetCursorPosY(ImGui.GetCursorPosY() + 7);
 
-                string modeText = mode == MODE.LOCAL ? "Local Space" : "World Space";
+                string modeText = mode == MODE.LOCAL ? "本地空间" : "世界空间";
 
                 if (ImGui.Button(modeText, new(115, 30)))
                 {
@@ -487,17 +487,17 @@ namespace IVPlugin.UI.Windows
 
                 ImGui.BeginGroup();
 
-                ImGui.Checkbox("Disable Node Selection", ref forceDisabled);
+                ImGui.Checkbox("禁用节点选择", ref forceDisabled);
 
                 ImGui.SetNextItemWidth(100);
-                ImGui.DragFloat("Node Size", ref circleSize, 1, 1, 25);
+                ImGui.DragFloat("节点圆环尺寸", ref circleSize, 1, 1, 25);
 
                 ImGui.SetNextItemWidth(100);
-                ImGui.DragFloat("Bone Size", ref lineThickness, 1, 0, 10);
+                ImGui.DragFloat("骨骼线条尺寸", ref lineThickness, 1, 0, 10);
 
                 ImGui.EndGroup();
 
-                if(ImGui.Checkbox("Freeze All Animations", ref freezeAnim))
+                if(ImGui.Checkbox("冻结所有动画", ref freezeAnim))
                 {
                     if (freezeAnim)
                     {
@@ -511,9 +511,9 @@ namespace IVPlugin.UI.Windows
 
                 ImGui.Separator();
 
-                BearGUI.Text("Skeleton Controller", 1.1f);
+                BearGUI.Text("骨骼控制器", 1.1f);
 
-                ImGui.Text($"Position:");
+                ImGui.Text($"位置：");
 
                 ImGui.SameLine();
 
@@ -524,7 +524,7 @@ namespace IVPlugin.UI.Windows
                 dirtyValue |= ImGui.DragFloat3("##transPos", ref pos, .01f);
 
 
-                ImGui.Text($"Rotation:");
+                ImGui.Text($"旋转：");
 
                 ImGui.SameLine();
 
@@ -536,7 +536,7 @@ namespace IVPlugin.UI.Windows
 
                 dirtyValue |= ImGui.DragFloat3("##transRot", ref convertedRot, .01f);
 
-                ImGui.Text($"Scale:");
+                ImGui.Text($"缩放：");
 
                 ImGui.SameLine();
 
@@ -570,27 +570,27 @@ namespace IVPlugin.UI.Windows
 
                 ImGui.Spacing();
 
-                string mirrorTex = "Mirror Off";
+                string mirrorTex = "镜像关闭";
 
                 switch (mirror)
                 {
                     case MirrorModes.None:
-                        mirrorTex = "Mirror Off";
+                        mirrorTex = "镜像关闭";
                         break;
                     case MirrorModes.Copy:
-                        mirrorTex = "Mirror Copy";
+                        mirrorTex = "镜像复制";
                         break;
                     case MirrorModes.Full:
-                        mirrorTex = "Mirror On";
+                        mirrorTex = "镜像开启";
                         break;
                     case MirrorModes.MirrorX:
-                        mirrorTex = "Mirror X Only";
+                        mirrorTex = "仅镜像 X";
                         break;
                     case MirrorModes.MirrorY:
-                        mirrorTex = "Mirror Y Only";
+                        mirrorTex = "仅镜像 Y";
                         break;
                     case MirrorModes.MirrorZ:
-                        mirrorTex = "Mirror Z Only";
+                        mirrorTex = "仅镜像 Z";
                         break;
                 }
 
@@ -623,7 +623,7 @@ namespace IVPlugin.UI.Windows
                 ImGui.SameLine();
                 ImGui.SetCursorPosX(186);
 
-                string chainText = chain ? "Chain On" : "Chain Off";
+                string chainText = chain ? "连锁开启" : "连锁关闭";
 
                 if (ImGui.Button(chainText, new(82, 22)))
                 {
@@ -633,7 +633,7 @@ namespace IVPlugin.UI.Windows
                 ImGui.SameLine();
                 ImGui.SetCursorPosX(272);
 
-                if (ImGui.Button("Reset Bone", new(82, 22)))
+                if (ImGui.Button("重置骨骼", new(82, 22)))
                 {
                     if (sBone != null)
                     {
@@ -648,23 +648,23 @@ namespace IVPlugin.UI.Windows
                     }
                 }
 
-                if (ImGui.CollapsingHeader("Basic Filters"))
+                if (ImGui.CollapsingHeader("基础筛选"))
                 {
                     var toggleStart = ImGui.GetCursorPos();
 
-                    ImGui.Checkbox("Body", ref showBase);
+                    ImGui.Checkbox("身体", ref showBase);
 
                     ImGui.SetCursorPos(new(toggleStart.X + 84, toggleStart.Y));
 
-                    ImGui.Checkbox("Face", ref showFace);
+                    ImGui.Checkbox("脸部", ref showFace);
 
                     ImGui.SetCursorPos(new(toggleStart.X + 168, toggleStart.Y));
 
-                    ImGui.Checkbox("Hair", ref showhair);
+                    ImGui.Checkbox("头发", ref showhair);
 
                     toggleStart = ImGui.GetCursorPos();
 
-                    ImGui.Checkbox("Weapon", ref showWeapon);
+                    ImGui.Checkbox("武器", ref showWeapon);
 
                     ImGui.SetCursorPos(new(toggleStart.X + 84, toggleStart.Y));
 
@@ -675,15 +675,15 @@ namespace IVPlugin.UI.Windows
                     ImGui.Checkbox("IVCS", ref showIVCS);
                 }
 
-                if (ImGui.CollapsingHeader("Advanced Filters"))
+                if (ImGui.CollapsingHeader("高级筛选"))
                 {
                     var toggleStart = ImGui.GetCursorPos();
                     ImGui.BeginGroup();
-                    BearGUI.Text("Face", 1.1f);
+                    BearGUI.Text("脸部", 1.1f);
 
-                    ImGui.Checkbox("Eyes", ref showEyes);
-                    ImGui.Checkbox("Mouth", ref showMouth);
-                    ImGui.Checkbox("Ears", ref showHead);
+                    ImGui.Checkbox("眼睛", ref showEyes);
+                    ImGui.Checkbox("嘴", ref showMouth);
+                    ImGui.Checkbox("耳朵", ref showHead);
 
                     ImGui.EndGroup();
 
@@ -693,10 +693,10 @@ namespace IVPlugin.UI.Windows
                     ImGui.SetCursorPos(new(toggleStart.X + 84, toggleStart.Y - 3));
 
                     ImGui.BeginGroup();
-                    BearGUI.Text("Body", 1.1f);
-                    ImGui.Checkbox("Legs", ref showLegs);
-                    ImGui.Checkbox("Torso", ref showTorso);
-                    ImGui.Checkbox("Arms", ref showArms);
+                    BearGUI.Text("身体", 1.1f);
+                    ImGui.Checkbox("腿", ref showLegs);
+                    ImGui.Checkbox("上半身", ref showTorso);
+                    ImGui.Checkbox("手臂", ref showArms);
 
                     ImGui.EndGroup();
 
@@ -705,10 +705,10 @@ namespace IVPlugin.UI.Windows
                     ImGui.SetCursorPos(new(toggleStart.X + 168, toggleStart.Y - 3));
 
                     ImGui.BeginGroup();
-                    BearGUI.Text("Other", 1.1f);
-                    ImGui.Checkbox("Skirt", ref showSkirt);
-                    ImGui.Checkbox("Tail", ref showTail);
-                    ImGui.Checkbox("Sheath", ref showBuki);
+                    BearGUI.Text("其他", 1.1f);
+                    ImGui.Checkbox("裙子", ref showSkirt);
+                    ImGui.Checkbox("尾巴", ref showTail);
+                    ImGui.Checkbox("刀鞘", ref showBuki);
 
                     ImGui.EndGroup();
 
@@ -724,7 +724,7 @@ namespace IVPlugin.UI.Windows
 
                 }
 
-                if (ImGui.CollapsingHeader("Skeleton Tree"))
+                if (ImGui.CollapsingHeader("骨骼树状目录"))
                 {
                     if (ImGui.BeginChild("##skeletontreechild", new(350, 125)))
                     {
@@ -754,7 +754,7 @@ namespace IVPlugin.UI.Windows
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Save Pose Data");
+                    ImGui.SetTooltip("保存姿势数据");
                 }
 
                 ImGui.SameLine();
@@ -785,7 +785,7 @@ namespace IVPlugin.UI.Windows
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Load Pose Data");
+                    ImGui.SetTooltip("加载姿势数据");
                 }
 
                 ImGui.SameLine();
@@ -798,7 +798,7 @@ namespace IVPlugin.UI.Windows
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Reset Character Orientation & Pose");
+                    ImGui.SetTooltip("重置角色方向与姿势");
                 }
             }
         }

@@ -40,21 +40,21 @@ public static class MainWindow
 
         if (ImGui.Begin($"Illusio Vitae", ref IsOpen, ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse))
         {
-            if (ImGui.Button("Open Configuration Settings"))
+            if (ImGui.Button("打开配置设置"))
             {
                 ConfigWindow.Show();
             }
 
             if (!DalamudServices.penumbraServices.CheckAvailablity())
             {
-                ImGui.TextColored(IVColors.Red, "Penumbra Unavailable/Version Mismatch");
+                ImGui.TextColored(IVColors.Red, "Penumbra 不可用/版本不匹配");
             }
 
             ImGui.Spacing();
 
             if (!EventManager.validCheck)
             {
-                ImGui.TextColored(IVColors.Red, "Limited Mode (Player is Busy or not in a Safe Area)");
+                ImGui.TextColored(IVColors.Red, "限制模式（玩家忙碌或不在安全区域）");
 
                 SkeletonOverlay.Hide();
 
@@ -69,7 +69,7 @@ public static class MainWindow
                     {
                         using (ImRaii.Disabled(!DalamudServices.penumbraServices.CheckAvailablity()))
                         {
-                            if (ImGui.BeginTabItem("Custom Emotes"))
+                            if (ImGui.BeginTabItem("自定义情感动作"))
                             CustomdataTab.Draw();
                         }
 
@@ -80,7 +80,7 @@ public static class MainWindow
                         {
                             ImGui.BeginDisabled();
                         }
-                        if (ImGui.BeginTabItem("World Control"))
+                        if (ImGui.BeginTabItem("世界控制"))
                             WorldTab.Draw();
 
                         if (!EventManager.validCheck)
@@ -102,7 +102,7 @@ public static class MainWindow
             }
             else
             {
-                ImGui.Text("Please Input an Installation Directory.");
+                ImGui.Text("请输入安装目录。");
                 ConfigWindow.Show();
             }
         }

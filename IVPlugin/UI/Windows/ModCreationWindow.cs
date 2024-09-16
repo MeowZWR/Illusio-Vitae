@@ -51,7 +51,7 @@ namespace IVPlugin.UI.Windows
 
             ImGui.SetNextWindowSizeConstraints(new(100, 100), new Vector2(900, 700));
 
-            if (ImGui.Begin($"Mod Creation", ref IsOpen, ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse))
+            if (ImGui.Begin($"模组制作", ref IsOpen, ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse))
             {
                 ShowMeta();
                 ShowEmotes();
@@ -61,31 +61,31 @@ namespace IVPlugin.UI.Windows
         private static void ShowMeta()
         {
             ImGui.BeginGroup();
-            ImGui.Text("Mod Name:");
+            ImGui.Text("模组名称：");
             ImGui.SameLine(90);
             ImGui.SetNextItemWidth(100);
             ImGui.InputText("##ModNameInput", ref ModName, 100);
             ImGui.Spacing();
-            ImGui.Text("Mod Author:");
+            ImGui.Text("模组作者：");
             ImGui.SameLine(90);
             ImGui.SetNextItemWidth(100);
             ImGui.InputText("##ModAuthorInput", ref ModAuthor, 200);
             ImGui.Spacing();
-            ImGui.Text("Camera File:");
+            ImGui.Text("相机文件：");
             ImGui.SameLine(90);
             ImGui.SetNextItemWidth(100);
             ImGui.InputText("##CameraFileInput", ref CamPath, 5000);
             ImGui.SameLine();
-            if (ImGui.Button("Browse##.xcpbrowse"))
+            if (ImGui.Button("浏览##.xcpbrowse"))
             {
-                WindowsManager.Instance.fileDialogManager.OpenFileDialog("Import Camera File", ".xcp", (Confirm, FilePath) =>
+                WindowsManager.Instance.fileDialogManager.OpenFileDialog("导入相机文件", ".xcp", (Confirm, FilePath) =>
                 {
                     if (!Confirm) return;
 
                     CamPath = FilePath;
                 });
             }
-            ImGui.Text("Allow NPCS");
+            ImGui.Text("允许NPC");
             ImGui.SameLine(90);
             ImGui.SetNextItemWidth(100);
             ImGui.Checkbox("##NPCCheck", ref allowNPC);
@@ -94,7 +94,7 @@ namespace IVPlugin.UI.Windows
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Allow the use of custom actors for this mod");
+                ImGui.SetTooltip("允许此模组使用自定义角色");
             }
             ImGui.EndGroup();
 
@@ -129,28 +129,28 @@ namespace IVPlugin.UI.Windows
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Catagory Sets the type of emote it is. Most things are global for example but would \n set it to Male if you only support male animations. This has an effect on the modlist within the plugin.");
+                ImGui.SetTooltip("这里可以按性别设置情感动作分类。\n例如大多数情感动作是全局的，但如果你只支持男性动画，可以将其设置为男性。\n这会影响插件中的模组列表。");
             }
 
             ImGui.SameLine();
 
-            ImGui.Checkbox("Use NSFW Catagories", ref allowNSFW);
+            ImGui.Checkbox("使用NSFW分类", ref allowNSFW);
 
-            if (ImGui.Button("Import pmp file"))
+            if (ImGui.Button("导入pmp文件"))
             {
                 ParsePMP();
             }
 
             ImGui.SameLine();
 
-            if(ImGui.Button("Export IVMP"))
+            if(ImGui.Button("导出为IVMP"))
             {
                 CreateIVMP();
             }
 
             ImGui.SameLine();
 
-            if(ImGui.Button("Reset Fields"))
+            if(ImGui.Button("重置字段"))
             {
                 ResetFields();
             }
@@ -169,22 +169,22 @@ namespace IVPlugin.UI.Windows
 
         private static void ShowEmotes()
         {
-            if(ImGui.BeginTabBar("Resource List"))
+            if(ImGui.BeginTabBar("资源列表"))
             {
-                if (ImGui.BeginTabItem("Shared Resources"))
+                if (ImGui.BeginTabItem("共享资源"))
                 {
                     sharedResources.Draw();
                     ImGui.EndTabItem();
                 }
 
-                if (ImGui.BeginTabItem("Emotes"))
+                if (ImGui.BeginTabItem("情感动作"))
                 {
-                    if (ImGui.Button("Add Emote"))
+                    if (ImGui.Button("添加情感动作"))
                     {
                         emotes.Add(new());
                     }
 
-                    if (ImGui.BeginTabBar("Emote List"))
+                    if (ImGui.BeginTabBar("情感动作列表"))
                     {
                         for(var i = 0; i < emotes.Count; i++)
                         {
@@ -205,7 +205,7 @@ namespace IVPlugin.UI.Windows
                     ImGui.EndTabItem();
                 }
 
-                if(ImGui.BeginTabItem("CM Calls"))
+                if(ImGui.BeginTabItem("CM调用"))
                 {
                     TracklistGenerator.Draw();
                     ImGui.EndTabItem();
@@ -219,7 +219,7 @@ namespace IVPlugin.UI.Windows
         {
             Dictionary<string, string> filePaths = new Dictionary<string, string>();
 
-            WindowsManager.Instance.fileDialogManager.OpenFileDialog("PMP To Convert", ".pmp", (Confirm, FilePath) =>
+            WindowsManager.Instance.fileDialogManager.OpenFileDialog("PMP 转换为", ".pmp", (Confirm, FilePath) =>
             {
                 if (!Confirm) return;
 
@@ -466,7 +466,7 @@ namespace IVPlugin.UI.Windows
                 file.emoteData.Add(tempData);
             }
 
-            WindowsManager.Instance.fileDialogManager.SaveFileDialog("Select a location to Save the Illusio Vitae Modpack", ".ivmp", $"NewMod.ivmp", ".ivmp", (Confirm, FilePath) =>
+            WindowsManager.Instance.fileDialogManager.SaveFileDialog("选择一个位置来保存 Illusio Vitae 模组", ".ivmp", $"NewMod.ivmp", ".ivmp", (Confirm, FilePath) =>
             {
                 if (!Confirm) return;
                 WriteIVMP(file, Path.GetDirectoryName(FilePath) + "\\" + Path.GetFileNameWithoutExtension(FilePath) + ".ivmp");
@@ -701,12 +701,12 @@ namespace IVPlugin.UI.Windows
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("This tab is for files that are shared between emote.");
+                ImGui.SetTooltip("此选项卡用于存放在不同情感动作之间共享的文件。");
             }
 
             ImGui.Spacing();
 
-            if(ImGui.Button("Add Data path"))
+            if(ImGui.Button("添加数据路径"))
             {
                 paths.Add(new());
             }
@@ -737,12 +737,12 @@ namespace IVPlugin.UI.Windows
         public List<DataPathsUI> paths = new List<DataPathsUI>();
         public List<VFXData> vFXDatas = new List<VFXData>();
 
-        private string[] animationTypes = ["Base", "Startup", "Floor", "Sitting", "Blend", "Other", "Adjusted"];
+        private string[] animationTypes = ["基础", "启动", "坐地上", "坐下", "混合", "其他", "已调整"];
         public void Draw()
         {
             using (ImRaii.Disabled(ModCreationWindow.emotes[0] == this))
             {
-                if (ImGui.Button("Remove Emote"))
+                if (ImGui.Button("移除情感动作"))
                 {
                     ModCreationWindow.emotes.Remove(this);
                 }
@@ -751,7 +751,7 @@ namespace IVPlugin.UI.Windows
             ImGui.Spacing();
 
             ImGui.BeginGroup();
-            ImGui.Text("Emote Type:");
+            ImGui.Text("情感动作类型：");
             ImGui.SameLine(120);
             var currentModType = Enum.GetName(currentType);
             ImGui.SetNextItemWidth(100);
@@ -770,12 +770,12 @@ namespace IVPlugin.UI.Windows
                     }
                 }
             }
-            ImGui.Text("Emote Command:");
+            ImGui.Text("情感动作命令：");
             ImGui.SameLine(120);
             ImGui.SetNextItemWidth(100);
             ImGui.InputText("##EmoteCommandInput", ref Command, 100);
             ImGui.Spacing();
-            ImGui.Text("Animation ID:");
+            ImGui.Text("动画ID:");
             ImGui.SameLine(120);
             ImGui.SetNextItemWidth(70);
             ImGui.InputInt("##ReplacedAnimID", ref animID, 0);
@@ -792,12 +792,12 @@ namespace IVPlugin.UI.Windows
                 ImGui.SetTooltip("ID of animation the pap temporarily replaces");
             }
             ImGui.Spacing();
-            ImGui.Text("Force Loop");
+            ImGui.Text("强制循环");
             ImGui.SameLine(120);
             ImGui.SetNextItemWidth(100);
             ImGui.Checkbox("##LoopEmote", ref isLooping);
             ImGui.Spacing();
-            ImGui.Text("Disable Weapons");
+            ImGui.Text("禁用武器");
             ImGui.SameLine(120);
             ImGui.SetNextItemWidth(100);
             ImGui.Checkbox("##HideWeapon", ref hideWeapon);
@@ -807,7 +807,7 @@ namespace IVPlugin.UI.Windows
             ImGui.SetNextItemWidth(100);
             ImGui.InputText("##TracklistInput", ref tracklistPath, 500);
             ImGui.SameLine();
-            if (ImGui.Button("Browse##.ivtlfile"))
+            if (ImGui.Button("浏览##.ivtlfile"))
             {
                 WindowsManager.Instance.fileDialogManager.OpenFileDialog("Import Tracklist File", ".ivtl", (Confirm, FilePath) =>
                 {
@@ -828,7 +828,7 @@ namespace IVPlugin.UI.Windows
             {
                 if (popup.Success)
                 {
-                    ImGui.Text("Search:");
+                    ImGui.Text("搜索：");
                     ImGui.SameLine();
 
                     ImGui.SetNextItemWidth(150);
@@ -1209,7 +1209,7 @@ namespace IVPlugin.UI.Windows
             BearGUI.FontText(FontAwesomeIcon.QuestionCircle.ToIconString(), 1.25f);
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("This tab is for creating special IVMP tracklist that can call certain functions of the plugin during the animation") ;
+                ImGui.SetTooltip("此选项卡用于创建特殊的 IVMP 播放列表，可以在动画过程中调用插件的某些功能。") ;
             }
             ImGui.BeginGroup();
 

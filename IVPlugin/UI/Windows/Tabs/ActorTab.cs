@@ -31,10 +31,10 @@ namespace IVPlugin.UI.Windows.Tabs
 
         private static bool newActor = false, forceAnimation = false;
 
-        private static string[] EmoteType = ["Base", "Startup", "Floor", "Sitting", "Blend", "Other", "Adjusted"];
-        private static string[] Lipstyles = ["None", "Whisper (Short)", "Whisper (Normal)", "Whisper (Long)", "Talk (Short)", "Talk (Normal)", "Talk (Long)", "Shout (Short)", "Shout (Normal)", "Shout (Long)"];
-        private static string[] Races = ["Hyur Midlander Male", "Hyur Midlander Female", "Hyur Highlander Male", "Hyur Highlander Female", "Elezen Male", "Elezen Female", "Miqo'te Male", "Miqo'te Female", "Roegadyn Male", "Roegadyn Female", "Lalafell Male", "Lalafell Femake", "AuRa Male", "AuRa Female", "Horthgar Male", "Hrothgar Female", "Viera Male", "Viera Female"];
-        private static string[] AnimationSlotNames = ["Base:", "Torso:", "Expression:", "Additive:", "Mouth:", "Misc 1:", "Misc 2:", "Misc 3:", "Misc 4:", "Overlay:"];
+        private static string[] EmoteType = ["基础", "启动", "地面", "坐姿", "混合", "其他", "调整"];
+        private static string[] Lipstyles = ["无", "悄悄话（短）", "悄悄话（普通）", "悄悄话（长）", "交谈（短）", "交谈（普通）", "交谈（长）", "呼喊（短）", "呼喊（普通）", "呼喊（长）"];
+        private static string[] Races = ["中原人族男性", "中原人族女性", "高地人族男性", "高地人族女性", "精灵族男性", "精灵族女性", "猫魅族男性", "猫魅族女性", "鲁加族男性", "鲁加族女性", "拉拉菲尔族男性", "拉拉菲尔族女性", "敖龙族男性", "敖龙族女性", "硌狮族男性", "硌狮族女性", "维埃拉族男性", "维埃拉族女性"];
+        private static string[] AnimationSlotNames = ["基础:", "上半身:", "表情:", "附加:", "嘴部:", "杂项 1:", "杂项 2:", "杂项 3:", "杂项 4:", "叠加层:"];
         private static int[] lipIDs = [0, 626, 627, 628, 629, 630, 631, 632, 633, 634];
 
         private static int lipSelect = 0;
@@ -52,7 +52,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
         public static void Draw()
         {
-            BearGUI.Text("Selected Actors List", 1.1f);
+            BearGUI.Text("选择角色列表", 1.1f);
 
             if (selectedActor != null && !selectedActor.IsLoaded())
             {
@@ -186,7 +186,7 @@ namespace IVPlugin.UI.Windows.Tabs
                 {
                     if (popup.Success)
                     {
-                        if (ImGui.Button("Rename Actor"))
+                        if (ImGui.Button("重命名角色"))
                         {
                             ImGui.OpenPopup("RenameActorPopup");
                         }
@@ -196,7 +196,7 @@ namespace IVPlugin.UI.Windows.Tabs
                     {
                         if (popup2.Success)
                         {
-                            ImGui.Text("Input Name");
+                            ImGui.Text("输入名称");
 
                             ImGui.SetNextItemWidth(100);
                             if (ImGui.InputText("##customNameText", ref newName, 21, ImGuiInputTextFlags.EnterReturnsTrue))
@@ -208,11 +208,11 @@ namespace IVPlugin.UI.Windows.Tabs
 
                             if (checValidname())
                             {
-                                ImGui.Text("Valid Name");
+                                ImGui.Text("有效名称");
                             }
                             else
                             {
-                                ImGui.Text("Invalid Name");
+                                ImGui.Text("无效名称");
                             }
                         }
                     }
@@ -227,7 +227,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
             using (ImRaii.Disabled(DalamudServices.TargetManager.Target == null && DalamudServices.TargetManager.GPoseTarget == null))
             {
-                if (BearGUI.ImageButton("Add Actor", GameResourceManager.Instance.GetResourceImage("ActorAdd.png").ImGuiHandle, new(22, 22)))
+                if (BearGUI.ImageButton("添加角色", GameResourceManager.Instance.GetResourceImage("ActorAdd.png").ImGuiHandle, new(22, 22)))
                 {
                     if (DalamudServices.clientState.IsGPosing)
                     {
@@ -242,7 +242,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Add Targeted Actor");
+                    ImGui.SetTooltip("添加目标角色");
                 }
             }
 
@@ -250,7 +250,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
             using (ImRaii.Disabled(selectedActor == ActorManager.Instance.playerActor))
             {
-                if (BearGUI.ImageButton("Remove Actor", GameResourceManager.Instance.GetResourceImage("ActorRemove.png").ImGuiHandle, new(22, 22)))
+                if (BearGUI.ImageButton("移除角色", GameResourceManager.Instance.GetResourceImage("ActorRemove.png").ImGuiHandle, new(22, 22)))
                 {
                     var deletableActor = selectedActor;
                     selectedActor = ActorManager.Instance.playerActor;
@@ -266,7 +266,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Remove Selected Actor");
+                    ImGui.SetTooltip("移除选择的角色");
                 }
             }
 
@@ -280,14 +280,14 @@ namespace IVPlugin.UI.Windows.Tabs
 
             ImGui.SetCursorPosX(ImGui.GetCursorPosX() + 2.5f);
 
-            if (BearGUI.ImageButton("Edit Actor", GameResourceManager.Instance.GetResourceImage("ActorEdit.png").ImGuiHandle, new(22, 22)))
+            if (BearGUI.ImageButton("编辑角色", GameResourceManager.Instance.GetResourceImage("ActorEdit.png").ImGuiHandle, new(22, 22)))
             {
                 ApperanceWindow.SetActorAndShow(ref selectedActor);
             }
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Open Actor Appearance Editor");
+                ImGui.SetTooltip("打开角色外观编辑器");
             }
 
             ImGui.SameLine();
@@ -301,14 +301,14 @@ namespace IVPlugin.UI.Windows.Tabs
             {
                 if (SkeletonOverlay.IsOpen)
                 {
-                    if (BearGUI.ImageButton("Hide Skeleton", GameResourceManager.Instance.GetResourceImage("SkeletonDisable.png").ImGuiHandle, new(22, 22)))
+                    if (BearGUI.ImageButton("隐藏骨骼", GameResourceManager.Instance.GetResourceImage("SkeletonDisable.png").ImGuiHandle, new(22, 22)))
                     {
                         SkeletonOverlay.Hide();
                     }
                 }
                 else
                 {
-                    if (BearGUI.ImageButton("Show Skeleton", GameResourceManager.Instance.GetResourceImage("SkeletonEnable.png").ImGuiHandle, new(22, 22)))
+                    if (BearGUI.ImageButton("显示骨骼", GameResourceManager.Instance.GetResourceImage("SkeletonEnable.png").ImGuiHandle, new(22, 22)))
                     {
                         SkeletonOverlay.Show(selectedActor);
                     }
@@ -317,9 +317,9 @@ namespace IVPlugin.UI.Windows.Tabs
                 if (ImGui.IsItemHovered())
                 {
                     if (SkeletonOverlay.IsOpen)
-                        ImGui.SetTooltip("Hide Skeleton Editor & Overlay");
+                        ImGui.SetTooltip("隐藏骨骼编辑器和叠加层");
                     else
-                        ImGui.SetTooltip("Show Skeleton Editor & Overlay");
+                        ImGui.SetTooltip("显示骨骼编辑器和叠加层");
                 }
             }
 
@@ -338,21 +338,21 @@ namespace IVPlugin.UI.Windows.Tabs
 
             ImGui.SetCursorPosX(ImGui.GetCursorPosX() + 2.5f);
 
-            if (BearGUI.ImageButton("New Actor", GameResourceManager.Instance.GetResourceImage("ActorNew.png").ImGuiHandle, new(22, 22)))
+            if (BearGUI.ImageButton("新角色", GameResourceManager.Instance.GetResourceImage("ActorNew.png").ImGuiHandle, new(22, 22)))
             {
                 ImGui.OpenPopup("CustomActorNamePopup");
             }
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Create New Actor");
+                ImGui.SetTooltip("新建角色");
             }
 
             ImGui.SameLine();
 
             using (ImRaii.Disabled(selectedActor.isCustom && !DalamudServices.clientState.IsGPosing))
             {
-                if (BearGUI.ImageButton("Target Actor", GameResourceManager.Instance.GetResourceImage("ActorTarget.png").ImGuiHandle, new(22, 22)))
+                if (BearGUI.ImageButton("目标角色", GameResourceManager.Instance.GetResourceImage("ActorTarget.png").ImGuiHandle, new(22, 22)))
                 {
                     if (DalamudServices.clientState.IsGPosing)
                         DalamudServices.TargetManager.GPoseTarget = selectedActor.actorObject;
@@ -362,7 +362,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Target Selected Actor");
+                    ImGui.SetTooltip("目标选定角色");
                 }
             }
             
@@ -372,7 +372,7 @@ namespace IVPlugin.UI.Windows.Tabs
                 {
                     newActor = true;
 
-                    ImGui.Text("Input Name");
+                    ImGui.Text("输入名称");
 
                     ImGui.SetNextItemWidth(100);
                     if(ImGui.InputText("##customNameText", ref newName, 21, ImGuiInputTextFlags.EnterReturnsTrue))
@@ -385,14 +385,14 @@ namespace IVPlugin.UI.Windows.Tabs
 
                     if (checValidname())
                     {
-                        ImGui.Text("Valid Name");
+                        ImGui.Text("有效名称");
                     }
                     else
                     {
-                        ImGui.Text("Invalid Name");
+                        ImGui.Text("无效名称");
                     }
 
-                    ImGui.Checkbox("Add Companion Slot", ref addCompanionSlot);
+                    ImGui.Checkbox("添加宠物栏", ref addCompanionSlot);
                 }
                 else
                 {
@@ -418,7 +418,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
             using (ImRaii.Disabled(!DalamudServices.clientState.IsGPosing && !IllusioVitae.InDebug()))
             {
-                if (BearGUI.ImageButton("Save Scene", GameResourceManager.Instance.GetResourceImage("SceneSave.png").ImGuiHandle, new(22, 22)))
+                if (BearGUI.ImageButton("保存场景", GameResourceManager.Instance.GetResourceImage("SceneSave.png").ImGuiHandle, new(22, 22)))
                 {
                     ActorScene scene = new();
 
@@ -427,19 +427,19 @@ namespace IVPlugin.UI.Windows.Tabs
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Save Actor Scene");
+                    ImGui.SetTooltip("保存角色场景");
                 }
 
                 ImGui.SameLine();
 
-                if (BearGUI.ImageButton("Load Scene", GameResourceManager.Instance.GetResourceImage("SceneLoad.png").ImGuiHandle, new(22, 22)))
+                if (BearGUI.ImageButton("加载场景", GameResourceManager.Instance.GetResourceImage("SceneLoad.png").ImGuiHandle, new(22, 22)))
                 {
                     ASceneWarningWindow.Show();
                 }
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Load Actor Scene");
+                    ImGui.SetTooltip("加载角色场景");
                 }
             }
             ImGui.EndGroup();
@@ -511,13 +511,13 @@ namespace IVPlugin.UI.Windows.Tabs
 
         private static void ActorDraw(XIVActor _actor)
         {
-            BearGUI.Text("Player Settings", 1.1f);
+            BearGUI.Text("玩家设置", 1.1f);
 
-            ImGui.Checkbox("Lock Appearance", ref _actor.forceCustomAppearance);
+            ImGui.Checkbox("锁定外观", ref _actor.forceCustomAppearance);
 
             ImGui.SameLine();
 
-            List<string> comboNames = new() { "Character & Equipment Data", "Only Character Data", "Only Equipment Data" };
+            List<string> comboNames = new() { "角色与装备数据", "仅角色数据", "仅装备数据" };
 
             ImGui.SetNextItemWidth(210);
 
@@ -541,9 +541,9 @@ namespace IVPlugin.UI.Windows.Tabs
                 ImGui.Spacing();
                 ImGui.Separator();
 
-                BearGUI.Text("Animation Controller", 1.1f);
+                BearGUI.Text("动画控制器", 1.1f);
 
-                ImGui.Checkbox("Force & Loop Base Animation Playback", ref _actor.DoNotInterupt);
+                ImGui.Checkbox("强制并循环播放基础动画", ref _actor.DoNotInterupt);
 
                 ImGui.SetNextItemWidth(50);
 
@@ -580,7 +580,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Play Base Animation");
+                    ImGui.SetTooltip("播放基础动画");
                 }
 
                 ImGui.SameLine();
@@ -595,7 +595,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Pause Base Animation");
+                    ImGui.SetTooltip("暂停基础动画");
                 }
 
                 ImGui.SameLine();
@@ -622,26 +622,26 @@ namespace IVPlugin.UI.Windows.Tabs
                 {
                     if (ImGui.IsItemHovered())
                     {
-                        ImGui.SetTooltip("Unloop Base Animation");
+                        ImGui.SetTooltip("取消循环基础动画");
                     }
                 }
                 else
                 {
                     if (ImGui.IsItemHovered())
                     {
-                        ImGui.SetTooltip("Loop Base Animation");
+                        ImGui.SetTooltip("循环基础动画");
                     }
                 }
 
                 ImGui.SameLine();
                 ImGui.SetCursorPosX(208);
-                ImGui.Text("Base Animation Selection");
+                ImGui.Text("基础动画选择");
 
                 using (var popup = ImRaii.Popup("emoteandactionsmenu"))
                 {
                     if (popup.Success)
                     {
-                        ImGui.Text("Search:");
+                        ImGui.Text("搜索：");
                         ImGui.SameLine();
 
                         ImGui.SetNextItemWidth(150);
@@ -654,7 +654,7 @@ namespace IVPlugin.UI.Windows.Tabs
                         if (ImGui.BeginTabBar("##EmoteInformationTabbar"))
                         {
 
-                            if (ImGui.BeginTabItem("Emotes##EmoteTabItem"))
+                            if (ImGui.BeginTabItem("情感动作##EmoteTabItem"))
                             {
                                 using (var listbox = ImRaii.ListBox($"###listbox", new(250, 200)))
                                 {
@@ -716,7 +716,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
                                 ImGui.EndTabItem();
                             }
-                            if (ImGui.BeginTabItem("Actions##ActionTabItem"))
+                            if (ImGui.BeginTabItem("技能##ActionTabItem"))
                             {
                                 using (var listbox = ImRaii.ListBox($"###listbox", new(200, 200)))
                                 {
@@ -768,7 +768,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
                                 ImGui.EndTabItem();
                             }
-                            if (ImGui.BeginTabItem("Other##TimelinesTabTiem"))
+                            if (ImGui.BeginTabItem("其他##TimelinesTabTiem"))
                             {
                                 using (var listbox = ImRaii.ListBox($"###listbox", new(350, 200)))
                                 {
@@ -839,7 +839,7 @@ namespace IVPlugin.UI.Windows.Tabs
                 {
                     if (popup.Success)
                     {
-                        ImGui.Text("Search:");
+                        ImGui.Text("搜索：");
                         ImGui.SameLine();
 
                         ImGui.SetNextItemWidth(150);
@@ -913,12 +913,12 @@ namespace IVPlugin.UI.Windows.Tabs
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Play Blend Animation");
+                    ImGui.SetTooltip("播放混合动画");
                 }
 
                 ImGui.SameLine();
                 ImGui.SetCursorPosX(208);
-                ImGui.Text("Blend Animation Selection");
+                ImGui.Text("混合动画选择");
 
                 var previewValue = Lipstyles[lipSelect];
 
@@ -949,12 +949,12 @@ namespace IVPlugin.UI.Windows.Tabs
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Play Mouth Animation");
+                    ImGui.SetTooltip("播放嘴部动画");
                 }
 
                 ImGui.SameLine();
                 ImGui.SetCursorPosX(208);
-                ImGui.Text("Mouth Animation Selection");
+                ImGui.Text("嘴部动画选择");
 
                 var raceCode = Enum.GetName(_actor.GetRaceAnimCode()) ?? "N/A";
 
@@ -987,7 +987,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
                 ImGui.SameLine();
                 ImGui.SetCursorPosX(208);
-                ImGui.Text("Racial Animation Override");
+                ImGui.Text("种族动画覆盖");
 
                 ImGui.SetNextItemWidth(147);
                 ImGui.DragFloat($"##animationspeed", ref _actor.animSpeed, 0.1f, 0.1f, 5);
@@ -1005,12 +1005,12 @@ namespace IVPlugin.UI.Windows.Tabs
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Reset Animation Speed");
+                    ImGui.SetTooltip("重置动画速度");
                 }
 
                 ImGui.SameLine();
                 ImGui.SetCursorPosX(208);
-                ImGui.Text("Animation Speed");
+                ImGui.Text("动画速度");
 
                 if (_actor.animPaused)
                 {
@@ -1019,10 +1019,10 @@ namespace IVPlugin.UI.Windows.Tabs
 
                     ImGui.SameLine();
                     ImGui.SetCursorPosX(208);
-                    ImGui.Text("Animation Scrubbing");
+                    ImGui.Text("动画进度");
                 }
 
-                if (ImGui.CollapsingHeader("Animation Slots"))
+                if (ImGui.CollapsingHeader("动画栏位"))
                 {
                     var slotStartPos = ImGui.GetCursorPos();
 
@@ -1084,7 +1084,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
                 if (!DalamudServices.clientState.IsGPosing && !IllusioVitae.InDebug())
                 {
-                    ImGui.TextColored(IVColors.Red, "Animation Control is Unavailable Outside of Group Pose");
+                    ImGui.TextColored(IVColors.Red, "集体动作外无法使用动画控制");
                 }
 
                 if (IllusioVitae.InDebug())

@@ -40,7 +40,7 @@ namespace IVPlugin.Commands
 
             DalamudServices.CommandManager.AddHandler(MainCommand, new CommandInfo(OnMainCommand)
             {
-                HelpMessage = "Opens Illusio Vitae's GUI. Use help to get more information"
+                HelpMessage = "打开 Illusio Vitae 的图形用户界面。使用help获取更多信息。"
             });
 
             Instance = this;

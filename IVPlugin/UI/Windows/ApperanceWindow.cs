@@ -122,7 +122,7 @@ namespace IVPlugin.UI.Windows
 
             ImGui.SetNextWindowSizeConstraints(new (100,100), new Vector2(800, 1200));
 
-            if (ImGui.Begin($"Concept Matrix: Appearance Editor", ref IsOpen, ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse))
+            if (ImGui.Begin($"Concept Matrix: 外观编辑器", ref IsOpen, ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse))
             {
                 if (CurrentActor.GetModelType() != 0 && !IllusioVitae.InDebug())
                 {
@@ -135,13 +135,13 @@ namespace IVPlugin.UI.Windows
 
                 if (ImGui.BeginTabBar("##ApperanceTabs"))
                 {
-                    if (ImGui.BeginTabItem("Character Data"))
+                    if (ImGui.BeginTabItem("角色数据"))
                     {
                         DrawCharacterUI();
 
                         ImGui.EndTabItem();
                     }
-                    if (ImGui.BeginTabItem("Equipment Data"))
+                    if (ImGui.BeginTabItem("装备数据"))
                     {
                         DrawEquipmentUI();
 
@@ -202,7 +202,7 @@ namespace IVPlugin.UI.Windows
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Clear Gear");
+                ImGui.SetTooltip("清楚装备");
             }
 
             ImGui.SameLine();
@@ -226,7 +226,7 @@ namespace IVPlugin.UI.Windows
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Load NPC SmallClothes Set");
+                ImGui.SetTooltip("加载NPC内衣套装");
             }
 
             ImGui.SameLine();
@@ -250,7 +250,7 @@ namespace IVPlugin.UI.Windows
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Load Emperor Set");
+                ImGui.SetTooltip("加载皇帝新衣套装");
             }
 
             ImGui.Separator();
@@ -260,17 +260,17 @@ namespace IVPlugin.UI.Windows
             {
                 ImGui.BeginDisabled();
             }
-            DrawGearSelector("Main Hand", CurrentActor.GetWeaponSlot(WeaponSlot.MainHand), ActorEquipSlot.MainHand);
+            DrawGearSelector("主手", CurrentActor.GetWeaponSlot(WeaponSlot.MainHand), ActorEquipSlot.MainHand);
             if (!EventManager.validCheck)
             {
                 ImGui.EndDisabled();
             }
 
-            DrawGearSelector("Head",CurrentActor.GetEquipmentSlot(EquipmentSlot.Head), ActorEquipSlot.Head);
-            DrawGearSelector("Body",CurrentActor.GetEquipmentSlot(EquipmentSlot.Body), ActorEquipSlot.Body);
-            DrawGearSelector("Hands",CurrentActor.GetEquipmentSlot(EquipmentSlot.Hands), ActorEquipSlot.Hands);
-            DrawGearSelector("Legs",CurrentActor.GetEquipmentSlot(EquipmentSlot.Legs), ActorEquipSlot.Legs);
-            DrawGearSelector("Feet", CurrentActor.GetEquipmentSlot(EquipmentSlot.Feet), ActorEquipSlot.Feet);
+            DrawGearSelector("头部",CurrentActor.GetEquipmentSlot(EquipmentSlot.Head), ActorEquipSlot.Head);
+            DrawGearSelector("身体",CurrentActor.GetEquipmentSlot(EquipmentSlot.Body), ActorEquipSlot.Body);
+            DrawGearSelector("手部",CurrentActor.GetEquipmentSlot(EquipmentSlot.Hands), ActorEquipSlot.Hands);
+            DrawGearSelector("腿部",CurrentActor.GetEquipmentSlot(EquipmentSlot.Legs), ActorEquipSlot.Legs);
+            DrawGearSelector("足部", CurrentActor.GetEquipmentSlot(EquipmentSlot.Feet), ActorEquipSlot.Feet);
 
             ImGui.EndGroup();
 
@@ -284,18 +284,18 @@ namespace IVPlugin.UI.Windows
                 ImGui.BeginDisabled();
             }
 
-            DrawGearSelector("Off Hand",CurrentActor.GetWeaponSlot(WeaponSlot.OffHand), ActorEquipSlot.OffHand);
+            DrawGearSelector("副手",CurrentActor.GetWeaponSlot(WeaponSlot.OffHand), ActorEquipSlot.OffHand);
 
             if (!EventManager.validCheck)
             {
                 ImGui.EndDisabled();
             }
 
-            DrawGearSelector("Ears",CurrentActor.GetEquipmentSlot(EquipmentSlot.Ears), ActorEquipSlot.Ears);
-            DrawGearSelector("Neck",CurrentActor.GetEquipmentSlot(EquipmentSlot.Neck), ActorEquipSlot.Neck);
-            DrawGearSelector("Wrists",CurrentActor.GetEquipmentSlot(EquipmentSlot.Wrists), ActorEquipSlot.Wrists);
-            DrawGearSelector("Right Ring", CurrentActor.GetEquipmentSlot(EquipmentSlot.RFinger), ActorEquipSlot.RightRing);
-            DrawGearSelector("Left Ring",CurrentActor.GetEquipmentSlot(EquipmentSlot.LFinger), ActorEquipSlot.LeftRing);
+            DrawGearSelector("耳部",CurrentActor.GetEquipmentSlot(EquipmentSlot.Ears), ActorEquipSlot.Ears);
+            DrawGearSelector("颈部",CurrentActor.GetEquipmentSlot(EquipmentSlot.Neck), ActorEquipSlot.Neck);
+            DrawGearSelector("腕部",CurrentActor.GetEquipmentSlot(EquipmentSlot.Wrists), ActorEquipSlot.Wrists);
+            DrawGearSelector("右指", CurrentActor.GetEquipmentSlot(EquipmentSlot.RFinger), ActorEquipSlot.RightRing);
+            DrawGearSelector("左指",CurrentActor.GetEquipmentSlot(EquipmentSlot.LFinger), ActorEquipSlot.LeftRing);
             ImGui.EndGroup();
 
             ImGui.Separator();
@@ -412,7 +412,7 @@ namespace IVPlugin.UI.Windows
             int heightValue = customize.Height;
             int bustValue = customize.BustSize;
 
-            if (ImGui.Checkbox("Small Iris##chara_irisSize_id", ref SmallIrisCheck))
+            if (ImGui.Checkbox("较小眼瞳##chara_irisSize_id", ref SmallIrisCheck))
             {
                 customize.HasSmallIris = SmallIrisCheck;
                 UpdateData(true);
@@ -421,7 +421,7 @@ namespace IVPlugin.UI.Windows
 
             ImGui.SameLine();
 
-            if (ImGui.Checkbox("Mirror Face Paint##chara_flipFacePaint_Id", ref flippedFacePaint))
+            if (ImGui.Checkbox("面妆镜像t##chara_flipFacePaint_Id", ref flippedFacePaint))
             {
                 customize.FacepaintFlipped = flippedFacePaint;
                 UpdateData(true);
@@ -433,7 +433,7 @@ namespace IVPlugin.UI.Windows
             {
                 ImGui.SameLine();
 
-                if (ImGui.Checkbox("Lip Color##chara_lipColor_id", ref hasLipColor))
+                if (ImGui.Checkbox("唇色##chara_lipColor_id", ref hasLipColor))
                 {
                     customize.LipColorEnabled = hasLipColor;
                     UpdateData(true);
@@ -442,7 +442,7 @@ namespace IVPlugin.UI.Windows
 
                 ImGui.SameLine();
 
-                if (ImGui.Checkbox("Hair Highlights##chara_Highlights_id", ref hasHairHighlights))
+                if (ImGui.Checkbox("头发挑染##chara_Highlights_id", ref hasHairHighlights))
                 {
                     customize.HighlightsEnabled = hasHairHighlights;
                     UpdateData(true);
@@ -453,7 +453,7 @@ namespace IVPlugin.UI.Windows
             {
                 ImGui.SameLine();
 
-                if (ImGui.Checkbox("Fur Pattern##chara_furPattern_checkbox", ref hasHairHighlights))
+                if (ImGui.Checkbox("毛皮图案##chara_furPattern_checkbox", ref hasHairHighlights))
                 {
                     customize.HighlightsEnabled = hasHairHighlights;
                     UpdateData(true);
@@ -462,7 +462,7 @@ namespace IVPlugin.UI.Windows
             }
 
             ImGui.SetNextItemWidth(100);
-            if (ImGui.SliderInt("Height##height_int", ref heightValue, 1, 100))
+            if (ImGui.SliderInt("身高##height_int", ref heightValue, 1, 100))
             {
                 CurrentActor.scaleLock = false;
                 customize.Height = (byte)heightValue;
@@ -474,7 +474,7 @@ namespace IVPlugin.UI.Windows
                 ImGui.SameLine();
                 ImGui.SetCursorPosX(ImGui.GetItemRectSize().X + 95);
                 ImGui.SetNextItemWidth(100);
-                if (ImGui.SliderInt("Bust Size##bust_int", ref bustValue, 1, 100))
+                if (ImGui.SliderInt("胸围##bust_int", ref bustValue, 1, 100))
                 {
                     customize.BustSize = (byte)bustValue;
                     UpdateData(true);
@@ -607,15 +607,15 @@ namespace IVPlugin.UI.Windows
 
             ImGui.BeginGroup();
 
-            DrawSelector(faceTypeIcon, "faceType", "Face Type", faces, ref faceIDX, ref customize.FaceType);
+            DrawSelector(faceTypeIcon, "faceType", "脸型", faces, ref faceIDX, ref customize.FaceType);
 
             ImGui.SameLine();
 
             ImGui.SetCursorPos(new(ImGui.GetCursorPosX() + 70,ImGui.GetCursorPosY() - 3));
 
-            DrawSelector(hairStyleIcon, "hairstyle", "Hair Style", hairStyles.ToList(), ref hairStyleIDX, ref customize.HairStyle);
+            DrawSelector(hairStyleIcon, "hairstyle", "发型", hairStyles.ToList(), ref hairStyleIDX, ref customize.HairStyle);
 
-            DrawFacePaintSelector(facePaintIcon, "facepaint", "Face Paint", facePaints.ToList(), ref facePaintIDX);
+            DrawFacePaintSelector(facePaintIcon, "facepaint", "面纹", facePaints.ToList(), ref facePaintIDX);
 
             ImGui.SameLine();
 
@@ -628,7 +628,7 @@ namespace IVPlugin.UI.Windows
                 facialFeatureIDX = 0;
             }
 
-            ImGui.Text("Features");
+            ImGui.Text("特征");
 
             ImGui.SetNextItemWidth(100);
             if (ImGui.InputInt($"##facefeature_id", ref facialFeatureIDX, 0, 0, ImGuiInputTextFlags.EnterReturnsTrue | ImGuiInputTextFlags.CharsScientific))
@@ -679,7 +679,7 @@ namespace IVPlugin.UI.Windows
 
             if (customize.Race == Races.Hrothgar || customize.Race == Races.Miqote || customize.Race == Races.AuRa)
             {
-                featureTypeName = "Tail Type";
+                featureTypeName = "尾巴形状";
             }
 
             if (customize.Race == Races.Hrothgar || customize.Race == Races.Miqote || customize.Race == Races.AuRa)
@@ -770,7 +770,7 @@ namespace IVPlugin.UI.Windows
             if (lipsIDX > lipsMenu.SubParams.Length - 1) lipsIDX = lipsMenu.SubParams.Length - 1;
 
             ImGui.SetNextItemWidth(100);
-            if (ImGui.InputInt("Jaw Shape##chara_jaw_id", ref jawIDX, 1, 1, ImGuiInputTextFlags.EnterReturnsTrue | ImGuiInputTextFlags.CharsScientific))
+            if (ImGui.InputInt("下颌形状##chara_jaw_id", ref jawIDX, 1, 1, ImGuiInputTextFlags.EnterReturnsTrue | ImGuiInputTextFlags.CharsScientific))
             {
                 if (jawIDX > jawMenu.SubParams.Length - 1) jawIDX = jawMenu.SubParams.Length - 1;
                 if (jawIDX == -1) jawIDX = 0;
@@ -783,7 +783,7 @@ namespace IVPlugin.UI.Windows
             ImGui.SetCursorPosX(initScale + 75);
 
             ImGui.SetNextItemWidth(100);
-            if (ImGui.InputInt("Eye Shape##chara_eyeshape_id", ref eyeIDX, 1, 1, ImGuiInputTextFlags.EnterReturnsTrue | ImGuiInputTextFlags.CharsScientific))
+            if (ImGui.InputInt("眼型##chara_eyeshape_id", ref eyeIDX, 1, 1, ImGuiInputTextFlags.EnterReturnsTrue | ImGuiInputTextFlags.CharsScientific))
             {
                 if (eyeIDX > eyeMenu.SubParams.Length - 1) eyeIDX = eyeMenu.SubParams.Length - 1;
                 if (eyeIDX == -1) eyeIDX = 0;
@@ -792,7 +792,7 @@ namespace IVPlugin.UI.Windows
             }
 
             ImGui.SetNextItemWidth(100);
-            if (ImGui.InputInt("Eyebrow Shape##chara_eyebrow_id", ref eyeBrowIDX, 1, 1, ImGuiInputTextFlags.EnterReturnsTrue | ImGuiInputTextFlags.CharsScientific))
+            if (ImGui.InputInt("眉形##chara_eyebrow_id", ref eyeBrowIDX, 1, 1, ImGuiInputTextFlags.EnterReturnsTrue | ImGuiInputTextFlags.CharsScientific))
             {
                 if (eyeBrowIDX > eyebrowMenu.SubParams.Length - 1) eyeBrowIDX = eyebrowMenu.SubParams.Length - 1;
                 if (eyeBrowIDX == -1) eyeBrowIDX = 0;
@@ -804,7 +804,7 @@ namespace IVPlugin.UI.Windows
             ImGui.SetCursorPosX(initScale + 75);
 
             ImGui.SetNextItemWidth(100);
-            if (ImGui.InputInt("Nose Shape##chara_nose_id", ref noseIDX, 1, 1, ImGuiInputTextFlags.EnterReturnsTrue | ImGuiInputTextFlags.CharsScientific))
+            if (ImGui.InputInt("鼻型##chara_nose_id", ref noseIDX, 1, 1, ImGuiInputTextFlags.EnterReturnsTrue | ImGuiInputTextFlags.CharsScientific))
             {
                 if (noseIDX > noseMenu.SubParams.Length - 1) noseIDX = noseMenu.SubParams.Length - 1;
                 if (noseIDX == -1) noseIDX = 0;
@@ -816,11 +816,11 @@ namespace IVPlugin.UI.Windows
 
             if (customize.Race == Races.Hrothgar)
             {
-                mouthText = "Fang Length";
+                mouthText = "虎牙长度";
             }
             else
             {
-                mouthText = "Lip Shape";
+                mouthText = "唇形";
             }
 
             ImGui.SetNextItemWidth(100);
@@ -847,7 +847,7 @@ namespace IVPlugin.UI.Windows
 
                 ImGui.SetCursorPosX(ImGui.GetCursorPosX() - 4);
 
-                if (ImGui.Button("Select##chara_voice", new(48, 22)))
+                if (ImGui.Button("选择##chara_voice", new(48, 22)))
                 {
                     ImGui.OpenPopup("Voice Menu Popup");
                 }
@@ -908,21 +908,21 @@ namespace IVPlugin.UI.Windows
 
                 ImGui.SetCursorPosX(ImGui.GetCursorPosX() - 4);
 
-                ImGui.Text("Voice");
+                ImGui.Text("声音");
             }
             
             string featureTypeName = string.Empty;
-            string featureSizeName = "Muscle Tone";
+            string featureSizeName = "肌肉线条";
 
             if (customize.Race == Races.Hrothgar || customize.Race == Races.Miqote || customize.Race == Races.AuRa)
             {
-                featureSizeName = "Tail Size";
+                featureSizeName = "尾巴尺寸";
             }
 
             if (customize.Race == Races.Elezen || customize.Race == Races.Lalafel || customize.Race == Races.Viera)
             {
-                featureTypeName = "Ear Type";
-                featureSizeName = "Ear Size";
+                featureTypeName = "耳朵类型";
+                featureSizeName = "耳朵尺寸";
             }
 
             if (customize.Race == Races.Elezen || customize.Race == Races.Lalafel || customize.Race == Races.Viera)
@@ -936,7 +936,7 @@ namespace IVPlugin.UI.Windows
                     raceFeatureTypeIDX = 1;
 
                 ImGui.SetNextItemWidth(100);
-                if (ImGui.InputInt("Ear Type##chara_earType_id", ref raceFeatureTypeIDX, 1, 1, ImGuiInputTextFlags.EnterReturnsTrue | ImGuiInputTextFlags.CharsScientific))
+                if (ImGui.InputInt("耳朵类型##chara_earType_id", ref raceFeatureTypeIDX, 1, 1, ImGuiInputTextFlags.EnterReturnsTrue | ImGuiInputTextFlags.CharsScientific))
                 {
                     customize.RaceFeatureType = (byte)raceFeatureTypeIDX;
                     UpdateData(true);
@@ -1001,11 +1001,11 @@ namespace IVPlugin.UI.Windows
             {
                 if (customize.Race != Races.Hrothgar)
                 {
-                    ImGui.SetTooltip("Skin Color");
+                    ImGui.SetTooltip("皮肤颜色");
                 }
                 else
                 {
-                    ImGui.SetTooltip("Fur Color");
+                    ImGui.SetTooltip("毛发颜色");
                 }
             }
 
@@ -1022,22 +1022,22 @@ namespace IVPlugin.UI.Windows
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Lip Color");
+                    ImGui.SetTooltip("嘴唇颜色");
                 }
 
                 DrawColorPopup("lipColorPopup", lipColors, ref customize.LipColor, shaderLockType.LipColor);
 
                 ImGui.SameLine();
 
-                ImGui.Text("Skin Colors");
+                ImGui.Text("皮肤颜色");
             }
             else if (customize.Race != Races.Hrothgar)
             {
-                ImGui.Text("Skin Colors");
+                ImGui.Text("皮肤颜色");
             }
             else if (customize.Race == Races.Hrothgar)
             {
-                ImGui.Text("Fur Color");
+                ImGui.Text("毛发颜色");
             }
 
             ImGui.EndGroup();
@@ -1077,7 +1077,7 @@ namespace IVPlugin.UI.Windows
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Link Eye Colors");
+                ImGui.SetTooltip("链接瞳色");
             }
 
             ImGui.SameLine();
@@ -1089,7 +1089,7 @@ namespace IVPlugin.UI.Windows
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Left Eye Color");
+                ImGui.SetTooltip("左眼瞳色");
             }
 
             DrawColorPopup("leyeColorPopup", eyeColors, ref customize.LEyeColor, shaderLockType.LEyeColor);
@@ -1105,22 +1105,22 @@ namespace IVPlugin.UI.Windows
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Right Eye Color");
+                ImGui.SetTooltip("右眼瞳色");
             }
 
             DrawColorPopup("ReyeColorPopup", eyeColors, ref customize.REyeColor, shaderLockType.REyeColor);
 
             ImGui.SameLine();
 
-            ImGui.Text("Eye Colors");
+            ImGui.Text("瞳色");
 
             ImGui.BeginGroup();
 
-            string hairColorName = "Hair Colors";
+            string hairColorName = "头发颜色";
 
             if (customize.Race == Races.Hrothgar)
             {
-                hairColorName = "Hair & Pattern Colors";
+                hairColorName = "毛发&Pattern颜色";
             }
 
             if (BearGUI.ColoredLableButton($"mainHairColor", currentHairColor, currentHairColorIdx.ToString()))
@@ -1130,7 +1130,7 @@ namespace IVPlugin.UI.Windows
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Hair Color");
+                ImGui.SetTooltip("头发颜色");
             }
 
             DrawColorPopup("HairColorsPopup", hairColors, ref customize.HairColor, shaderLockType.HairColor);
@@ -1148,11 +1148,11 @@ namespace IVPlugin.UI.Windows
                 {
                     if (customize.Race != Races.Hrothgar)
                     {
-                        ImGui.SetTooltip("Hair Highlights Color");
+                        ImGui.SetTooltip("头发挑染颜色");
                     }
                     else
                     {
-                        ImGui.SetTooltip("Pattern Color");
+                        ImGui.SetTooltip("Pattern颜色");
                     }
                 }
 
@@ -1183,7 +1183,7 @@ namespace IVPlugin.UI.Windows
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Feature Color");
+                ImGui.SetTooltip("特征颜色");
             }
 
             DrawColorPopup("faceFeatureColorPopup", eyeColors, ref customize.FaceFeaturesColor, shaderLockType.FeatureColor);
@@ -1197,14 +1197,14 @@ namespace IVPlugin.UI.Windows
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Face Paint Color");
+                ImGui.SetTooltip("面妆颜色");
             }
 
             DrawColorPopup("facePaintPopup", facePaintColors, ref customize.FacePaintColor, shaderLockType.None);
 
             ImGui.SameLine();
 
-            ImGui.Text("Feature Colors");
+            ImGui.Text("特征颜色");
 
             ImGui.EndGroup();
         }
@@ -1212,7 +1212,7 @@ namespace IVPlugin.UI.Windows
         private static void DrawAdvancedMenu()
         {
 
-            BearGUI.Text("Advanced Shader & Appearance Overrides", 1.1f);
+            BearGUI.Text("高级着色器和外观覆盖", 1.1f);
 
             var alpha = CurrentActor.GetTransparency();
             var wetness = CurrentActor.GetWetness();
@@ -1227,11 +1227,11 @@ namespace IVPlugin.UI.Windows
                 ImGui.BeginGroup();
 
                 ImGui.SetNextItemWidth(125);
-                if (ImGui.DragInt("Model ID##chara_model_id", ref modelIDX, 0, 0))
+                if (ImGui.DragInt("模型ID##chara_model_id", ref modelIDX, 0, 0))
                     CurrentActor.SetModelType((uint)modelIDX, true);
 
                 ImGui.SetNextItemWidth(125);
-                if (ImGui.DragFloat("Visibility##alphaValue", ref alpha, 0.1f, 0, 1))
+                if (ImGui.DragFloat("可见性##alphaValue", ref alpha, 0.1f, 0, 1))
                 {
                     CurrentActor.SetTransparency(alpha);
                 }
@@ -1248,13 +1248,13 @@ namespace IVPlugin.UI.Windows
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Lock Wetness");
+                    ImGui.SetTooltip("锁定湿身");
                 }
 
                 ImGui.SameLine();
 
                 ImGui.SetNextItemWidth(95);
-                if (ImGui.DragFloat("Wetness##WetnessValue", ref wetness, 0.1f, 0, 1.01f))
+                if (ImGui.DragFloat("湿身##WetnessValue", ref wetness, 0.1f, 0, 1.01f))
                 {
                     CurrentActor.SetWetness(wetness);
                 }
@@ -1262,7 +1262,7 @@ namespace IVPlugin.UI.Windows
                 using(ImRaii.Disabled(CurrentActor.GetModelType() != 0 && !(IllusioVitae.IsDebug && IllusioVitae.InDebug())))
                 {
                     ImGui.SetNextItemWidth(125);
-                    if (ImGui.DragFloat("Muscle Tone##muscletone", ref shader.MuscleTone, 0.1f, 0, 3))
+                    if (ImGui.DragFloat("肌肉线条##muscletone", ref shader.MuscleTone, 0.1f, 0, 3))
                     {
                         CurrentActor.UpdateShaderLocks(shaderLockType.MuscleTone, true);
                         CurrentActor.ApplyShaderparams(shader);
@@ -1270,7 +1270,7 @@ namespace IVPlugin.UI.Windows
                 }
                 
                 ImGui.SetNextItemWidth(125);
-                if (ImGui.DragFloat("Scale##SizeValue", ref size, 0.1f, 0.1f, 15))
+                if (ImGui.DragFloat("缩放##SizeValue", ref size, 0.1f, 0.1f, 15))
                 {
                     CurrentActor.SetActorScale(size);
                 }
@@ -1290,7 +1290,7 @@ namespace IVPlugin.UI.Windows
 
                 if (customize.Race != Races.Hrothgar)
                 {
-                    if (ImGui.ColorButton("Skin Color##rawskinColorButton", new Vector4(shader.SkinColor, 1)))
+                    if (ImGui.ColorButton("皮肤颜色##rawskinColorButton", new Vector4(shader.SkinColor, 1)))
                     {
                         ImGui.OpenPopup("skinRGBPicker");
                     }
@@ -1309,7 +1309,7 @@ namespace IVPlugin.UI.Windows
                     {
                         if (customize.Race != Races.Hrothgar)
                         {
-                            if (ImGui.ColorPicker3("Skin Color##rgbWheel", ref shader.SkinColor))
+                            if (ImGui.ColorPicker3("皮肤颜色##rgbWheel", ref shader.SkinColor))
                             {
                                 CurrentActor.UpdateShaderLocks(shaderLockType.SkinColor, true);
                                 CurrentActor.ApplyShaderparams(shader);
@@ -1317,7 +1317,7 @@ namespace IVPlugin.UI.Windows
                         }
                         else
                         {
-                            if (ImGui.ColorPicker3("Fur Color##rgbWheel", ref shader.SkinColor))
+                            if (ImGui.ColorPicker3("毛皮颜色##rgbWheel", ref shader.SkinColor))
                             {
                                 CurrentActor.UpdateShaderLocks(shaderLockType.SkinColor, true);
                                 CurrentActor.ApplyShaderparams(shader);
@@ -1333,14 +1333,14 @@ namespace IVPlugin.UI.Windows
                 if (customize.Race != Races.Hrothgar)
                 {
 
-                    if (ImGui.ColorButton("Skin Gloss Color##rawskinGlossColorButton", new Vector4(shader.SkinGloss, 1)))
+                    if (ImGui.ColorButton("皮肤光泽颜色##rawskinGlossColorButton", new Vector4(shader.SkinGloss, 1)))
                     {
                         ImGui.OpenPopup("skinGlossRGBPicker");
                     }
                 }
                 else
                 {
-                    if (ImGui.ColorButton("Fur Gloss Color##rawskinGlossColorButton", new Vector4(shader.SkinGloss, 1)))
+                    if (ImGui.ColorButton("毛皮光泽颜色##rawskinGlossColorButton", new Vector4(shader.SkinGloss, 1)))
                     {
                         ImGui.OpenPopup("skinGlossRGBPicker");
                     }
@@ -1352,7 +1352,7 @@ namespace IVPlugin.UI.Windows
 
                 if (customize.Race != Races.Hrothgar)
                 {
-                    if (ImGui.ColorButton("Lip Color##rawlipsColorButton", shader.MouthColor))
+                    if (ImGui.ColorButton("嘴唇颜色##rawlipsColorButton", shader.MouthColor))
                     {
                         ImGui.OpenPopup("lipsRGBPicker");
                     }
@@ -1361,7 +1361,7 @@ namespace IVPlugin.UI.Windows
                     {
                         if (popup.Success)
                         {
-                            if (ImGui.ColorPicker4("Lip Color##rgbWheel", ref shader.MouthColor))
+                            if (ImGui.ColorPicker4("嘴唇颜色##rgbWheel", ref shader.MouthColor))
                             {
                                 CurrentActor.UpdateShaderLocks(shaderLockType.LipColor, true);
                                 CurrentActor.ApplyShaderparams(shader);
@@ -1376,11 +1376,11 @@ namespace IVPlugin.UI.Windows
 
                 if (customize.Race != Races.Hrothgar)
                 {
-                    ImGui.Text("Skin Colors");
+                    ImGui.Text("皮肤颜色");
                 }
                 else
                 {
-                    ImGui.Text("Fur Colors");
+                    ImGui.Text("毛皮颜色");
                 }
 
                 using (var popup = ImRaii.Popup("skinGlossRGBPicker"))
@@ -1389,7 +1389,7 @@ namespace IVPlugin.UI.Windows
                     {
                         if (customize.Race != Races.Hrothgar)
                         {
-                            if (ImGui.ColorPicker3("Skin Gloss Color##rgbWheel", ref shader.SkinGloss))
+                            if (ImGui.ColorPicker3("皮肤光泽颜色##rgbWheel", ref shader.SkinGloss))
                             {
                                 CurrentActor.UpdateShaderLocks(shaderLockType.SkinColor, true);
                                 CurrentActor.ApplyShaderparams(shader);
@@ -1397,7 +1397,7 @@ namespace IVPlugin.UI.Windows
                         }
                         else
                         {
-                            if (ImGui.ColorPicker3("Fur Gloss Color##rgbWheel", ref shader.SkinGloss))
+                            if (ImGui.ColorPicker3("毛皮光泽颜色##rgbWheel", ref shader.SkinGloss))
                             {
                                 CurrentActor.UpdateShaderLocks(shaderLockType.SkinColor, true);
                                 CurrentActor.ApplyShaderparams(shader);
@@ -1406,7 +1406,7 @@ namespace IVPlugin.UI.Windows
                     }
                 }
 
-                if (ImGui.ColorButton("Hair Color##rawhairColorButton", new Vector4(shader.HairColor, 1)))
+                if (ImGui.ColorButton("头发颜色##rawhairColorButton", new Vector4(shader.HairColor, 1)))
                 {
                     ImGui.OpenPopup("hairRGBPicker");
                 }
@@ -1425,7 +1425,7 @@ namespace IVPlugin.UI.Windows
 
                 ImGui.SameLine();
 
-                if (ImGui.ColorButton("Hair Gloss##rawhairColorGlossButton", new Vector4(shader.HairGloss, 1)))
+                if (ImGui.ColorButton("头发光泽##rawhairColorGlossButton", new Vector4(shader.HairGloss, 1)))
                 {
                     ImGui.OpenPopup("hairGlossRGBPicker");
                 }
@@ -1434,14 +1434,14 @@ namespace IVPlugin.UI.Windows
 
                 if (customize.Race != Races.Hrothgar)
                 {
-                    if (ImGui.ColorButton("Hair Highlights Color##rawHairHighlightColorButton", new Vector4(shader.HairHighlight, 1)))
+                    if (ImGui.ColorButton("头发挑染颜色##rawHairHighlightColorButton", new Vector4(shader.HairHighlight, 1)))
                     {
                         ImGui.OpenPopup("HairHighlightRGBPicker");
                     }
                 }
                 else
                 {
-                    if (ImGui.ColorButton("Pattern Color##rawHairHighlightColorButton", new Vector4(shader.HairHighlight, 1)))
+                    if (ImGui.ColorButton("毛皮图案颜色##rawHairHighlightColorButton", new Vector4(shader.HairHighlight, 1)))
                     {
                         ImGui.OpenPopup("HairHighlightRGBPicker");
                     }
@@ -1453,7 +1453,7 @@ namespace IVPlugin.UI.Windows
                     {
                         if (customize.Race != Races.Hrothgar)
                         {
-                            if (ImGui.ColorPicker3("Hair Highlights Color##rgbWheel", ref shader.HairHighlight))
+                            if (ImGui.ColorPicker3("头发挑染颜色##rgbWheel", ref shader.HairHighlight))
                             {
                                 CurrentActor.UpdateShaderLocks(shaderLockType.HighlightColor, true);
                                 CurrentActor.ApplyShaderparams(shader);
@@ -1461,7 +1461,7 @@ namespace IVPlugin.UI.Windows
                         }
                         else
                         {
-                            if (ImGui.ColorPicker3("Pattern Color##rgbWheel", ref shader.HairHighlight))
+                            if (ImGui.ColorPicker3("毛皮图案颜色##rgbWheel", ref shader.HairHighlight))
                             {
                                 CurrentActor.UpdateShaderLocks(shaderLockType.HighlightColor, true);
                                 CurrentActor.ApplyShaderparams(shader);
@@ -1472,13 +1472,13 @@ namespace IVPlugin.UI.Windows
 
                 ImGui.SameLine();
 
-                ImGui.Text("Hair Colors");
+                ImGui.Text("头发颜色");
 
                 using (var popup = ImRaii.Popup("hairGlossRGBPicker"))
                 {
                     if (popup.Success)
                     {
-                        if (ImGui.ColorPicker3("Hair Gloss Color##rgbWheel", ref shader.HairGloss))
+                        if (ImGui.ColorPicker3("头发光泽颜色##rgbWheel", ref shader.HairGloss))
                         {
                             CurrentActor.UpdateShaderLocks(shaderLockType.HairColor, true);
                             CurrentActor.ApplyShaderparams(shader);
@@ -1507,12 +1507,12 @@ namespace IVPlugin.UI.Windows
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Link Eye Colors");
+                    ImGui.SetTooltip("链接瞳色");
                 }
 
                 ImGui.SameLine();
 
-                if (ImGui.ColorButton("Left Eye Color##rawlEyeColorButton", new Vector4(shader.LeftEyeColor, 1)))
+                if (ImGui.ColorButton("左眼瞳色##rawlEyeColorButton", new Vector4(shader.LeftEyeColor, 1)))
                 {
                     ImGui.OpenPopup("lEyeRGBPicker");
                 }
@@ -1521,7 +1521,7 @@ namespace IVPlugin.UI.Windows
                 {
                     if (popup.Success)
                     {
-                        if (ImGui.ColorPicker3("Left Eye Color##rgbWheel", ref shader.LeftEyeColor))
+                        if (ImGui.ColorPicker3("左眼瞳色##rgbWheel", ref shader.LeftEyeColor))
                         {
                             if (eyeShaderlock)
                             {
@@ -1539,7 +1539,7 @@ namespace IVPlugin.UI.Windows
 
                 ImGui.SameLine();
 
-                if (ImGui.ColorButton("Right Eye Color##rawrEyeColorButton", new Vector4(shader.RightEyeColor, 1)))
+                if (ImGui.ColorButton("右眼瞳色##rawrEyeColorButton", new Vector4(shader.RightEyeColor, 1)))
                 {
                     if (eyelock) ImGui.OpenPopup("lEyeRGBPicker");
                     else ImGui.OpenPopup("rightEyeRGBPicker");
@@ -1550,7 +1550,7 @@ namespace IVPlugin.UI.Windows
                 {
                     if (popup.Success)
                     {
-                        if (ImGui.ColorPicker3("Right Eye Color##rgbWheel", ref shader.RightEyeColor))
+                        if (ImGui.ColorPicker3("右眼瞳色##rgbWheel", ref shader.RightEyeColor))
                         {
                             CurrentActor.UpdateShaderLocks(shaderLockType.REyeColor, true);
                             CurrentActor.ApplyShaderparams(shader);
@@ -1560,11 +1560,11 @@ namespace IVPlugin.UI.Windows
 
                 ImGui.SameLine();
 
-                ImGui.Text("Eye Colors");
+                ImGui.Text("瞳色");
 
                 
 
-                if (ImGui.ColorButton("Feature Color##rawfeatureColorButton", new Vector4(shader.FeatureColor, 1)))
+                if (ImGui.ColorButton("特征/纹身颜色##rawfeatureColorButton", new Vector4(shader.FeatureColor, 1)))
                 {
                     ImGui.OpenPopup("featureRGBPicker");
                 }
@@ -1573,7 +1573,7 @@ namespace IVPlugin.UI.Windows
                 {
                     if (popup.Success)
                     {
-                        if (ImGui.ColorPicker3("Feature Color##rgbWheel", ref shader.FeatureColor))
+                        if (ImGui.ColorPicker3("特征/纹身颜色##rgbWheel", ref shader.FeatureColor))
                         {
                             CurrentActor.UpdateShaderLocks(shaderLockType.FeatureColor, true);
                             CurrentActor.ApplyShaderparams(shader);
@@ -1583,9 +1583,9 @@ namespace IVPlugin.UI.Windows
 
                 ImGui.SameLine();
 
-                ImGui.Text("Feature Colors");
+                ImGui.Text("特征/纹身颜色");
 
-                if (ImGui.ColorButton("Tint Color##tintColorButton", tint))
+                if (ImGui.ColorButton("色调##tintColorButton", tint))
                 {
                     ImGui.OpenPopup("tintRGBPicker");
                 }
@@ -1594,7 +1594,7 @@ namespace IVPlugin.UI.Windows
                 {
                     if (popup.Success)
                     {
-                        if (ImGui.ColorPicker4("Tint Color##rgbWheel", ref tint))
+                        if (ImGui.ColorPicker4("色调##rgbWheel", ref tint))
                         {
                             CurrentActor.SetTint(tint);
                         }
@@ -1612,7 +1612,7 @@ namespace IVPlugin.UI.Windows
                 {
                     if (popup.Success)
                     {
-                        if (ImGui.ColorPicker4("Tint Color##rgbWheel", ref mhTint))
+                        if (ImGui.ColorPicker4("色调##rgbWheel", ref mhTint))
                         {
                             CurrentActor.SetWeaponTint(WeaponSlot.MainHand, mhTint);
                         }
@@ -1630,7 +1630,7 @@ namespace IVPlugin.UI.Windows
                 {
                     if (popup.Success)
                     {
-                        if (ImGui.ColorPicker4("Tint Color##rgbWheel", ref ohTint))
+                        if (ImGui.ColorPicker4("色调##rgbWheel", ref ohTint))
                         {
                             CurrentActor.SetWeaponTint(WeaponSlot.OffHand, ohTint);
                         }
@@ -1639,7 +1639,7 @@ namespace IVPlugin.UI.Windows
 
                 ImGui.SameLine();
 
-                ImGui.Text("Tint Colors");
+                ImGui.Text("色调");
 
                 ImGui.EndGroup();
             }
@@ -1653,21 +1653,21 @@ namespace IVPlugin.UI.Windows
 
             ImGui.BeginGroup();
 
-            if (BearGUI.ImageButton($"Load NPC Appearance", GameResourceManager.Instance.GetResourceImage("CharaNPC.png").ImGuiHandle, new(26, 22)))
+            if (BearGUI.ImageButton($"加载NPC外观", GameResourceManager.Instance.GetResourceImage("CharaNPC.png").ImGuiHandle, new(26, 22)))
             {
                 ImGui.OpenPopup("NPC Picker Popup");
             }
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Load NPC Appearance");
+                ImGui.SetTooltip("加载NPC外观");
             }
 
             using (var popup = ImRaii.Popup("NPC Picker Popup"))
             {
                 if (popup.Success)
                 {
-                    ImGui.Text("Search:");
+                    ImGui.Text("搜索：");
                     ImGui.SameLine();
 
                     ImGui.SetNextItemWidth(150);
@@ -1675,7 +1675,7 @@ namespace IVPlugin.UI.Windows
 
                     if (ImGui.BeginTabBar("NPCData"))
                     {
-                        if (ImGui.BeginTabItem("Battle NPC##npctabitem"))
+                        if (ImGui.BeginTabItem("战斗NPC##npctabitem"))
                         {
                             using (var listbox = ImRaii.ListBox("###NPClistbox", new(271, 300)))
                             {
@@ -1757,7 +1757,7 @@ namespace IVPlugin.UI.Windows
                             ImGui.EndTabItem();
                         }
 
-                        if (ImGui.BeginTabItem("Event NPC##npctabitem"))
+                        if (ImGui.BeginTabItem("事件NPC##npctabitem"))
                         {
                             using (var listbox = ImRaii.ListBox("###NPClistbox", new(271, 300)))
                             {
@@ -1824,7 +1824,7 @@ namespace IVPlugin.UI.Windows
                             ImGui.EndTabItem();
                         }
 
-                        if (ImGui.BeginTabItem("Mounts##npctabitem"))
+                        if (ImGui.BeginTabItem("坐骑##npctabitem"))
                         {
                             using (var listbox = ImRaii.ListBox("###NPClistbox", new(271, 300)))
                             {
@@ -1891,7 +1891,7 @@ namespace IVPlugin.UI.Windows
                             ImGui.EndTabItem();
                         }
 
-                        if (ImGui.BeginTabItem("Minions##npctabitem"))
+                        if (ImGui.BeginTabItem("宠物##npctabitem"))
                         {
                             using (var listbox = ImRaii.ListBox("###NPClistbox", new(271, 300)))
                             {
@@ -1988,7 +1988,7 @@ namespace IVPlugin.UI.Windows
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Load Local Characters");
+                ImGui.SetTooltip("加载本地角色");
             }
             
 
@@ -2034,7 +2034,7 @@ namespace IVPlugin.UI.Windows
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Save Character Data");
+                ImGui.SetTooltip("保存角色数据");
             }
 
             ImGui.SameLine();
@@ -2055,7 +2055,7 @@ namespace IVPlugin.UI.Windows
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Load Character Data");
+                ImGui.SetTooltip("加载角色数据");
             }
 
             ImGui.SameLine();
@@ -2069,7 +2069,7 @@ namespace IVPlugin.UI.Windows
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Reset & Reload All Character Data");
+                ImGui.SetTooltip("重置并重新加载所有角色数据");
             }
         }
 
@@ -2424,7 +2424,7 @@ namespace IVPlugin.UI.Windows
             {
                 if (popup.Success)
                 {
-                    ImGui.Text("Search:");
+                    ImGui.Text("搜索：");
 
                     ImGui.SameLine();
 
@@ -2809,7 +2809,7 @@ namespace IVPlugin.UI.Windows
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Toggle Visibility");
+                    ImGui.SetTooltip("切换可见性");
                 }
 
                 ImGui.SameLine();
@@ -2826,7 +2826,7 @@ namespace IVPlugin.UI.Windows
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Toggle Visor");
+                    ImGui.SetTooltip("切换面甲");
                 }
             }
 
@@ -2835,7 +2835,7 @@ namespace IVPlugin.UI.Windows
             if(Stain0.Name == string.Empty) Stain0Name = "None";
             var correctedStain0Color = GUIMethods.ARGBToABGR(Stain0.Color);
 
-            if (BearGUI.ColoredLableButton($"##{slot}{Stain0Name}dyeSlotButton", correctedStain0Color, "Dye #1", false, new(71, ImGui.GetTextLineHeight() * 1.5f)))
+            if (BearGUI.ColoredLableButton($"##{slot}{Stain0Name}dyeSlotButton", correctedStain0Color, "染色 #1", false, new(71, ImGui.GetTextLineHeight() * 1.5f)))
             {
                 if(equip.Id != 0)
                     ImGui.OpenPopup($"{slot}{Stain0Name}dyeButtonPopup");
@@ -2848,7 +2848,7 @@ namespace IVPlugin.UI.Windows
             if (Stain0.Name == string.Empty) Stain1Name = "None";
             var correctedStain1Color = GUIMethods.ARGBToABGR(Stain1.Color);
 
-            if (BearGUI.ColoredLableButton($"##{slot}{Stain1Name}dyeSlot2Button", correctedStain1Color, "Dye #2", false, new(71, ImGui.GetTextLineHeight() * 1.5f)))
+            if (BearGUI.ColoredLableButton($"##{slot}{Stain1Name}dyeSlot2Button", correctedStain1Color, "染色 #2", false, new(71, ImGui.GetTextLineHeight() * 1.5f)))
             {
                 if (equip.Id != 0)
                     ImGui.OpenPopup($"{slot}{Stain1Name}dyeButtonPopup2");
@@ -2860,7 +2860,7 @@ namespace IVPlugin.UI.Windows
             {
                 if (popup.Success)
                 {
-                    ImGui.Text("Search: ");
+                    ImGui.Text("搜索：");
 
                     ImGui.SameLine();
 
@@ -2899,7 +2899,7 @@ namespace IVPlugin.UI.Windows
             {
                 if (popup.Success)
                 {
-                    ImGui.Text("Search: ");
+                    ImGui.Text("搜索：");
 
                     ImGui.SameLine();
 
@@ -3084,7 +3084,7 @@ namespace IVPlugin.UI.Windows
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Toggle Visibility");
+                    ImGui.SetTooltip("切换可见性");
                 }
             }
 
@@ -3093,7 +3093,7 @@ namespace IVPlugin.UI.Windows
             if (Stain0.Name == string.Empty) Stain0Name = "None";
             var correctedStain0Color = GUIMethods.ARGBToABGR(Stain0.Color);
 
-            if (BearGUI.ColoredLableButton($"##{slot}{Stain0Name}dyeSlotButton", correctedStain0Color, "Dye #1", false, new(71, ImGui.GetTextLineHeight() * 1.5f)))
+            if (BearGUI.ColoredLableButton($"##{slot}{Stain0Name}dyeSlotButton", correctedStain0Color, "染色 #1", false, new(71, ImGui.GetTextLineHeight() * 1.5f)))
             {
                 if(equip.Id != 0)
                     ImGui.OpenPopup($"{slot}{Stain0Name}dyeButtonPopup");
@@ -3106,7 +3106,7 @@ namespace IVPlugin.UI.Windows
             if (Stain0.Name == string.Empty) Stain1Name = "None";
             var correctedStain1Color = GUIMethods.ARGBToABGR(Stain1.Color);
 
-            if (BearGUI.ColoredLableButton($"##{slot}{Stain1Name}dyeSlotButton2", correctedStain1Color, "Dye #2", false, new(71, ImGui.GetTextLineHeight() * 1.5f)))
+            if (BearGUI.ColoredLableButton($"##{slot}{Stain1Name}dyeSlotButton2", correctedStain1Color, "染色 #2", false, new(71, ImGui.GetTextLineHeight() * 1.5f)))
             {
                 if(equip.Id != 0)
                     ImGui.OpenPopup($"{slot}{Stain1Name}dyeButtonPopup2");
@@ -3119,7 +3119,7 @@ namespace IVPlugin.UI.Windows
             {
                 if (popup.Success)
                 {
-                    ImGui.Text("Search: ");
+                    ImGui.Text("搜索：");
 
                     ImGui.SameLine();
 
@@ -3157,7 +3157,7 @@ namespace IVPlugin.UI.Windows
             {
                 if (popup.Success)
                 {
-                    ImGui.Text("Search: ");
+                    ImGui.Text("搜索：");
 
                     ImGui.SameLine();
 
@@ -3198,7 +3198,7 @@ namespace IVPlugin.UI.Windows
 
             var currentIcon = GameResourceManager.Instance.GetResourceImage("MinionSlot.png").ImGuiHandle;
 
-            var currentName = "Companions & Fashion";
+            var currentName = "伙伴 & 时尚";
 
             var id = 0;
 
@@ -3248,14 +3248,14 @@ namespace IVPlugin.UI.Windows
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Companion Slot");
+                ImGui.SetTooltip("伙伴 & 时尚");
             }
 
             using (var popup = ImRaii.Popup("Companion Select Popup"))
             {
                 if (popup.Success)
                 {
-                    ImGui.Text("Search:");
+                    ImGui.Text("搜索：");
                     ImGui.SameLine();
 
                     ImGui.SetNextItemWidth(150);
@@ -3265,7 +3265,7 @@ namespace IVPlugin.UI.Windows
                     {
                         using (ImRaii.Disabled(CurrentActor.MountCheck()))
                         {
-                            if (ImGui.BeginTabItem("Minions"))
+                            if (ImGui.BeginTabItem("宠物"))
                             {
                                 using (var listbox = ImRaii.ListBox("###MinionListBox", new(271, 300)))
                                 {
@@ -3328,7 +3328,7 @@ namespace IVPlugin.UI.Windows
                                 ImGui.EndTabItem();
                             }
 
-                            if (ImGui.BeginTabItem("Ornaments"))
+                            if (ImGui.BeginTabItem("时尚配饰"))
                             {
                                 using (var listbox = ImRaii.ListBox("###NPClistbox", new(271, 300)))
                                 {
@@ -3393,7 +3393,7 @@ namespace IVPlugin.UI.Windows
 
                         using (ImRaii.Disabled((!CurrentActor.MountCheck() && !DalamudServices.clientState.IsGPosing)))
                         {
-                            if (ImGui.BeginTabItem("Mounts"))
+                            if (ImGui.BeginTabItem("坐骑"))
                             {
                                 using (var listbox = ImRaii.ListBox("###NPClistbox", new(271, 300)))
                                 {
@@ -3467,7 +3467,7 @@ namespace IVPlugin.UI.Windows
 
             using (ImRaii.Disabled(CurrentActor.MountCheck() && !DalamudServices.clientState.IsGPosing))
             {
-                if (ImGui.Button("Clear Slot"))
+                if (ImGui.Button("清空槽位"))
                 {
                     CurrentActor.ClearCompanion();
                 }
@@ -3483,7 +3483,7 @@ namespace IVPlugin.UI.Windows
 
             var currentIcon = GameResourceManager.Instance.GetResourceImage("GlassesSlot.png").ImGuiHandle;
 
-            var currentName = "Facewear Slot";
+            var currentName = "面部装饰";
 
             if(glassesID != 0)
             {
@@ -3505,14 +3505,14 @@ namespace IVPlugin.UI.Windows
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Facewear Slot");
+                ImGui.SetTooltip("面部装饰");
             }
 
             using (var popup = ImRaii.Popup("facewear Select Popup"))
             {
                 if (popup.Success)
                 {
-                    ImGui.Text("Search:");
+                    ImGui.Text("搜索：");
                     ImGui.SameLine();
 
                     ImGui.SetNextItemWidth(150);

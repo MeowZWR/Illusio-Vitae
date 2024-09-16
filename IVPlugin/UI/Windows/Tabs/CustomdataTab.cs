@@ -37,7 +37,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
         public static void Draw()
         {
-            BearGUI.Text("Installed Emotes List", 1.1f);
+            BearGUI.Text("已安装情感动作列表", 1.1f);
 
             DrawEmoteTab();
             
@@ -67,7 +67,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Create Custom Emote");
+                ImGui.SetTooltip("创建自定义情感动作");
             }
 
             ImGui.SameLine();
@@ -76,7 +76,7 @@ namespace IVPlugin.UI.Windows.Tabs
             {
                 if (ImGui.Button(FontAwesomeIcon.FileImport.ToIconString()))
                 {
-                    WindowsManager.Instance.fileDialogManager.OpenFileDialog("Import Illusio Vitae Modpack", ".ivmp", (Confirm, FilePath) =>
+                    WindowsManager.Instance.fileDialogManager.OpenFileDialog("导入 Illusio Vitae 模组", ".ivmp", (Confirm, FilePath) =>
                     {
                         if (!Confirm) return;
 
@@ -93,7 +93,7 @@ namespace IVPlugin.UI.Windows.Tabs
                         }
                         catch (Exception ex)
                         {
-                            IllusioDebug.Log("Unable to process new mod" + ex, LogType.Error, false);
+                            IllusioDebug.Log("无法处理新的模组" + ex, LogType.Error, false);
 
                             Directory.Delete(folderPath, true);
                         }
@@ -104,7 +104,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Import Custom Emote");
+                ImGui.SetTooltip("导入自定义情感动作");
             }
 
             ImGui.SameLine();
@@ -124,7 +124,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Remove Custom Emote");
+                    ImGui.SetTooltip("移除自定义情感动作");
                 }
             }
 
@@ -142,7 +142,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Refresh Mod List");
+                ImGui.SetTooltip("刷新模组列表");
             }
 
             ImGui.EndGroup();
@@ -250,7 +250,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
                         if (ImGui.IsItemHovered())
                         {
-                            ImGui.SetTooltip(activeVFX ? "Stop VFX" : "Play Emote");
+                            ImGui.SetTooltip(activeVFX ? "停止VFX" : "播放情感动作");
                         }
 
                         using (ImRaii.Disabled((!EventManager.validCheck) || !isForCurrentRace))
@@ -269,7 +269,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
                                 if (ImGui.IsItemHovered())
                                 {
-                                    ImGui.SetTooltip("Play Multi Emote");
+                                    ImGui.SetTooltip("播放多个情感动作");
                                 }
 
                             }
@@ -288,9 +288,9 @@ namespace IVPlugin.UI.Windows.Tabs
                     }
                 }
 
-                if (ImGui.CollapsingHeader($"{selectedModData.emote.Name} Settings"))
+                if (ImGui.CollapsingHeader($"{selectedModData.emote.Name} 设置"))
                 {
-                    if (ImGui.Checkbox("Enable Emote", ref Enabled))
+                    if (ImGui.Checkbox("启用情感动作", ref Enabled))
                     {
                         ModManager.Instance.ToggleModStatus(selectedMod);
                     }
@@ -299,7 +299,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
                     if (selectedModData.emote.bgmData.scdPath != "" && selectedModData.emote.bgmData.scdPath != null)
                     {
-                        if (ImGui.Checkbox("Enable Music", ref BGMEnabled))
+                        if (ImGui.Checkbox("启用音乐", ref BGMEnabled))
                         {
                             ModManager.Instance.ToggleBGMStatus(selectedMod);
                         }
@@ -308,7 +308,7 @@ namespace IVPlugin.UI.Windows.Tabs
                     {
                         using (ImRaii.Disabled(true))
                         {
-                            ImGui.Button("Import BGM");
+                            ImGui.Button("导入BGM");
                         }
                     }
 
@@ -316,7 +316,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
                     if (selectedModData.emote.emoteData[0].vfxData.Count > 0 && selectedModData.emote.emoteData[0].vfxData[0].vfxDatapaths[0].GamePath != "")
                     {
-                        if (ImGui.Checkbox("Enable VFX", ref VFXEnabled))
+                        if (ImGui.Checkbox("启用VFX", ref VFXEnabled))
                         {
                             ModManager.Instance.ToggleVFXStatus(selectedMod);
                         }
@@ -326,14 +326,14 @@ namespace IVPlugin.UI.Windows.Tabs
 
                     if (selectedModData.emote.cameraPath != "" && selectedModData.emote.cameraPath != null)
                     {
-                        if (ImGui.Checkbox("Enable Camera (Gpose Only)", ref CameraEnabled))
+                        if (ImGui.Checkbox("启用相机（仅限集体动作）", ref CameraEnabled))
                         {
                             ModManager.Instance.ToggleCameraStatus(selectedMod);
                         }
                     }
                     else
                     {
-                        if (ImGui.Button("Import Cameara"))
+                        if (ImGui.Button("导入相机"))
                         {
                             ModManager.Instance.importCamera(selectedMod);
                         }
@@ -371,7 +371,7 @@ namespace IVPlugin.UI.Windows.Tabs
                         ImGui.Image(GameResourceManager.Instance.GetResourceImage("CategoryGlobal.png").ImGuiHandle, new(20, 20));
                         if (ImGui.IsItemHovered())
                         {
-                            ImGui.SetTooltip("Global Animation");
+                            ImGui.SetTooltip("全局动画");
                         }
                         isValidForCharacter = true;
                         break;
@@ -380,7 +380,7 @@ namespace IVPlugin.UI.Windows.Tabs
                         ImGui.Image(GameResourceManager.Instance.GetResourceImage("CategoryMale.png").ImGuiHandle, new(20, 20));
                         if (ImGui.IsItemHovered())
                         {
-                            ImGui.SetTooltip("Male Exclusive Animation");
+                            ImGui.SetTooltip("男性专用动画");
                         }
                         isValidForCharacter = playerActor.GetCustomizeData().Gender == Genders.Masculine;
                         break;
@@ -389,7 +389,7 @@ namespace IVPlugin.UI.Windows.Tabs
                         ImGui.Image(GameResourceManager.Instance.GetResourceImage("CategoryFemale.png").ImGuiHandle, new(20, 20));
                         if (ImGui.IsItemHovered())
                         {
-                            ImGui.SetTooltip("Female Exclusive Animation");
+                            ImGui.SetTooltip("女性专用动画");
                         }
                         isValidForCharacter = playerActor.GetCustomizeData().Gender == Genders.Feminine;
                         break;
@@ -398,7 +398,7 @@ namespace IVPlugin.UI.Windows.Tabs
                         ImGui.Image(GameResourceManager.Instance.GetResourceImage("CategoryStraight.png").ImGuiHandle, new(20, 20));
                         if (ImGui.IsItemHovered())
                         {
-                            ImGui.SetTooltip("Straight Animation");
+                            ImGui.SetTooltip("异性恋动画");
                         }
                         isValidForCharacter = true;
                         break;
@@ -407,7 +407,7 @@ namespace IVPlugin.UI.Windows.Tabs
                         ImGui.Image(GameResourceManager.Instance.GetResourceImage("CategoryBisexual.png").ImGuiHandle, new(20, 20));
                         if (ImGui.IsItemHovered())
                         {
-                            ImGui.SetTooltip("Bisexual Animation");
+                            ImGui.SetTooltip("双性恋动画");
                         }
                         isValidForCharacter = true;
                         break;
@@ -416,7 +416,7 @@ namespace IVPlugin.UI.Windows.Tabs
                         ImGui.Image(GameResourceManager.Instance.GetResourceImage("CategoryGay.png").ImGuiHandle, new(20, 20));
                         if (ImGui.IsItemHovered())
                         {
-                            ImGui.SetTooltip("Gay Animation");
+                            ImGui.SetTooltip("男同动画");
                         }
                         isValidForCharacter = playerActor.GetCustomizeData().Gender == Genders.Masculine;
                         break;
@@ -425,7 +425,7 @@ namespace IVPlugin.UI.Windows.Tabs
                         ImGui.Image(GameResourceManager.Instance.GetResourceImage("CategoryLesbian.png").ImGuiHandle, new(20, 20));
                         if (ImGui.IsItemHovered())
                         {
-                            ImGui.SetTooltip("Lesbian Animation");
+                            ImGui.SetTooltip("女同动画");
                         }
                         isValidForCharacter = playerActor.GetCustomizeData().Gender == Genders.Feminine;
                         break;
@@ -435,7 +435,7 @@ namespace IVPlugin.UI.Windows.Tabs
                         ImGui.Image(GameResourceManager.Instance.GetResourceImage("CategoryGlobal.png").ImGuiHandle, new(20, 20));
                         if (ImGui.IsItemHovered())
                         {
-                            ImGui.SetTooltip("Global Animation");
+                            ImGui.SetTooltip("全局动画");
                         }
                         isValidForCharacter = true;
                         break;
@@ -519,7 +519,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
                     if (ImGui.IsItemHovered())
                     {
-                        ImGui.SetTooltip("Mod Unavailable");
+                        ImGui.SetTooltip("模组不可用");
                     }
                 }
                 else
@@ -534,7 +534,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
                     if (ImGui.IsItemHovered())
                     {
-                        ImGui.SetTooltip(mod.config.enabled ? "Mod Enabled" : "Mod Disabled");
+                        ImGui.SetTooltip(mod.config.enabled ? "模组已启用" : "模组已禁用");
                     }
                 }
             }
@@ -548,7 +548,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Mod Unavailable for current Gender");
+                    ImGui.SetTooltip("当前性别下模组不可用");
                 }
             }
             
@@ -567,7 +567,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip(mod.config.BGMEnabled ? "Music Enabled" : "Music Disabled");
+                    ImGui.SetTooltip(mod.config.BGMEnabled ? "音乐已启用" : "音乐已禁用");
                 }
             }
             else
@@ -580,7 +580,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Music Unavailable");
+                    ImGui.SetTooltip("音乐不可用");
                 }
             }
 
@@ -616,9 +616,9 @@ namespace IVPlugin.UI.Windows.Tabs
                 if (ImGui.IsItemHovered())
                 {
                     if (activeVFX)
-                        ImGui.SetTooltip("Active VFX");
+                        ImGui.SetTooltip("当前VFX");
                     else
-                        ImGui.SetTooltip(mod.config.VFXEnabled ? "VFX Enabled" : "VFX Disabled");
+                        ImGui.SetTooltip(mod.config.VFXEnabled ? "VFX已启用" : "VFX已禁用");
                 }
             }
             else
@@ -631,7 +631,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("VFX Unavailable");
+                    ImGui.SetTooltip("VFX不可用");
                 }
             }
 
@@ -649,7 +649,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip(mod.config.cameraEnabled ? "Camera Enabled" : "Camera Disabled");
+                    ImGui.SetTooltip(mod.config.cameraEnabled ? "相机已启用" : "相机已禁用");
                 }
             }
             else
@@ -662,7 +662,7 @@ namespace IVPlugin.UI.Windows.Tabs
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("No Camera Available");
+                    ImGui.SetTooltip("没有可用的相机");
                 }
             }
 

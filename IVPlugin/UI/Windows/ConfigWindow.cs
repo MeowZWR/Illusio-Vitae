@@ -54,19 +54,19 @@ public static class ConfigWindow
         aSceneWarningShow = IllusioVitae.configuration.ActorSceneWarningShow;
         FadeInOnAnimation = IllusioVitae.configuration.FadeInOnAnimation;
 
-        if (ImGui.Begin($"Illusio Vitae: Configuration Settings", ref IsOpen, ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse))
+        if (ImGui.Begin($"Illusio Vitae: 配置设置", ref IsOpen, ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse))
         {
 
             if (ImGui.BeginTabBar("ConfigTabBar"))
             {
-                if (ImGui.BeginTabItem("General"))
+                if (ImGui.BeginTabItem("常规设置"))
                 {
                     GeneralTabDraw();
 
                     ImGui.EndTabItem();
                 }
 
-                if(ImGui.BeginTabItem("NPC Presets"))
+                if(ImGui.BeginTabItem("NPC预设"))
                 {
                     AppearancesDraw();
 
@@ -80,15 +80,15 @@ public static class ConfigWindow
 
     private static void GeneralTabDraw()
     {
-        BearGUI.Text("Custom Emote Installation Directory", 1.1f);
+        BearGUI.Text("自定义情感动作安装目录", 1.1f);
 
         BearGUI.Text(IllusioVitae.configuration.ModLocation, .85f);
 
         ImGui.Spacing();
 
-        if (ImGui.Button("Change Location"))
+        if (ImGui.Button("更改位置"))
         {
-            WindowsManager.Instance.fileDialogManager.OpenFolderDialog("Select a Custom Emote Installation Directory", (confirm, path) =>
+            WindowsManager.Instance.fileDialogManager.OpenFolderDialog("选择自定义情感动作安装目录", (confirm, path) =>
             {
                 if (confirm)
                 {
@@ -101,21 +101,21 @@ public static class ConfigWindow
 
         ImGui.Separator();
 
-        if (ImGui.Checkbox("Show Actor Scene World Space Warning", ref aSceneWarningShow))
+        if (ImGui.Checkbox("“显示角色场景世界空间警告”", ref aSceneWarningShow))
         {
             IllusioVitae.configuration.ActorSceneWarningShow = aSceneWarningShow;
         }
 
         ImGui.Spacing();
 
-        if (ImGui.Checkbox("Enable NPC Appearance Data for Concept Matrix", ref NPCHack))
+        if (ImGui.Checkbox("启用来自Concept Matrix的NPC外观数据", ref NPCHack))
         {
             IllusioVitae.configuration.UseNPCHack = NPCHack;
         }
 
         ImGui.Spacing();
 
-        if (ImGui.Checkbox("Enable Skeleton Editor Color Coding", ref SkeleColors))
+        if (ImGui.Checkbox("启用骨架编辑器颜色编码", ref SkeleColors))
         {
             IllusioVitae.configuration.UseSkeletonColors = SkeleColors;
         }
@@ -125,7 +125,7 @@ public static class ConfigWindow
         using (ImRaii.Disabled(!DalamudServices.penumbraServices.CheckAvailablity()))
         {
 
-            if (ImGui.Button("Install IVCS"))
+            if (ImGui.Button("安装 IVCS"))
             {
                 ModManager.Instance.InstallIVCSMod();
             }
@@ -133,7 +133,7 @@ public static class ConfigWindow
 
         ImGui.Spacing();
 
-        if (ImGui.Button("Show Changelog"))
+        if (ImGui.Button("显示更新日志"))
         {
             ChangeLogWindow.Show();
         }
@@ -143,7 +143,7 @@ public static class ConfigWindow
 
     private static void AppearancesDraw()
     {
-        BearGUI.Text("NPC Appearance Presets for Emotes", 1.1f);
+        BearGUI.Text("用于情感动作的NPC外观预设", 1.1f);
 
         ImGui.Spacing();
 
@@ -169,7 +169,7 @@ public static class ConfigWindow
 
         ImGui.BeginGroup();
 
-        if (ImGui.Button("Create Preset"))
+        if (ImGui.Button("创建预设"))
         {
             IllusioVitae.configuration.PresetActors = IllusioVitae.configuration.PresetActors.Append(new($"Illusio Actor", null)).ToArray();
         }
@@ -232,7 +232,7 @@ public static class ConfigWindow
 
         string actorName = IllusioVitae.configuration.PresetActors[id].Name;
 
-        ImGui.Text("Rename Character Preset:");
+        ImGui.Text("重命名角色预设：");
 
         ImGui.SetNextItemWidth(279);
         if(ImGui.InputText("##nameinput", ref actorName, 50))
@@ -246,17 +246,17 @@ public static class ConfigWindow
         ImGui.SameLine();
 
         ImGui.TextColored(CheckValidName(actorName) ? IVColors.Green : IVColors.Red,
-           CheckValidName(actorName) ? "Valid Name" : "Invalid Name");
+           CheckValidName(actorName) ? "有效名称" : "无效名称");
 
         ImGui.Spacing();
 
         var currentCharaLocation = IllusioVitae.configuration.PresetActors[id].charaPath;
             
-        ImGui.Text("Selected File: " + (string.IsNullOrEmpty(currentCharaLocation) ? "Not Set" : Path.GetFileName(currentCharaLocation)));
+        ImGui.Text("选择的文件：" + (string.IsNullOrEmpty(currentCharaLocation) ? "未设置" : Path.GetFileName(currentCharaLocation)));
 
-        if (ImGui.Button("Select Character Data"))
+        if (ImGui.Button("选择角色数据"))
         {
-            WindowsManager.Instance.fileDialogManager.OpenFileDialog("Import a Character Data File", ".chara", (confirm, path) =>
+            WindowsManager.Instance.fileDialogManager.OpenFileDialog("导入角色数据文件", ".chara", (confirm, path) =>
             {
                 if (confirm)
                 {
@@ -267,7 +267,7 @@ public static class ConfigWindow
 
         ImGui.SameLine();
 
-        if(ImGui.Button("Delete Selected Preset"))
+        if(ImGui.Button("删除选择的预设"))
         {
             var list = IllusioVitae.configuration.PresetActors.ToList();
 
