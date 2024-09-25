@@ -40,19 +40,19 @@ namespace IVPlugin.UI.Windows
 
             if (ImGui.Begin($"Full Transparency", ref IsOpen, ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse | ImGuiWindowFlags.NoTitleBar))
             {
-                ImGui.SetCursorPosX((500 / 2) - (ImGui.CalcTextSize("Readme!").X / 2 + 22));
+                ImGui.SetCursorPosX((500 / 2) - (ImGui.CalcTextSize("使用说明！").X / 2 + 22));
 
-                BearGUI.Text("Readme!", 1.5f, 0xFF0000FF);
+                BearGUI.Text("使用说明！", 1.5f, 0xFF0000FF);
 
                 ImGui.Spacing();
 
-                ImGui.Text("A lot of animation mods requires IVCS to be installed to function properly");
-                ImGui.SetCursorPosX((500 / 2) - (ImGui.CalcTextSize("Would you like us to install it in your Penumbra for you?").X / 2));
-                ImGui.Text("Would you like us to install it in your Penumbra for you?");
+                ImGui.Text("许多动画模组都需要安装IVCS才能正常运行");
+                ImGui.SetCursorPosX((500 / 2) - (ImGui.CalcTextSize("需要让IV插件为您将其安装在Penumbra中吗？").X / 2));
+                ImGui.Text("需要让IV插件为您将其安装在Penumbra中吗？");
 
-                ImGui.SetCursorPos(new((500 / 2) - ((ImGui.CalcTextSize("Yes").X/2) + (ImGui.CalcTextSize("No").X / 2)) - 10, 95));
+                ImGui.SetCursorPos(new((500 / 2) - ((ImGui.CalcTextSize(" 是 ").X/2) + (ImGui.CalcTextSize(" 否 ").X / 2)) - 10, 95));
 
-                if (ImGui.Button("Yes"))
+                if (ImGui.Button(" 是 "))
                 {
                     ModManager.Instance.InstallIVCSMod();
                     IllusioVitae.configuration.firstTimeCheck = false;
@@ -61,7 +61,7 @@ namespace IVPlugin.UI.Windows
 
                 ImGui.SameLine();
 
-                if(ImGui.Button("No"))
+                if(ImGui.Button(" No "))
                 {
                     IllusioVitae.configuration.firstTimeCheck = false;
                     IsOpen = false;
